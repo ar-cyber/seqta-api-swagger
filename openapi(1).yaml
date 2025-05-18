@@ -1,0 +1,2435 @@
+openapi: 3.0.4
+info:
+  title: SEQTA Learn API
+  description: |-
+    # The BetterSEQTA+ team is informing you that cookies are required for functional use of these APIs. Do not share any of the cookies used for these apis as they can be used to make modifications to your SEQTA assets (such as deleting emails and removing submissions). We are not responsible for any issues caused.
+    
+    Hello! You've stumbled (maybe you intentionally accessed it?) upon the documentation for SEQTA APIs. As we believe that software shouldn't be undocumented, the BetterSEQTA+ team has reviewed lots of SEQTA apis and has put them into a big API reference page for future use. We will update this accordingly.
+    
+    If you approve in this kind of stuff, join us at [our Discord!](https://discord.gg/uMkrgj57F5) We are a community dedicated to improving seqta and its functions. 
+    
+    *Maybe check out [The documenter's GitHub](https://github.com/ar-cyber), [The leader's GitHub](https://github.com/sethburkart123), [The quick-developer's GitHub](https://github.com/adenmgb), and [The deputy's GitHub](https://github.com/crazypersonalph) while you're here?*
+  contact:
+    email: betterseqta.plus@gmail.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0-OFFICIAL
+servers:
+  - url: https://{instance}
+    variables:
+      instance:
+        default: "change.me"
+        description: The query URL
+tags:
+  - name: General
+    description: General APIs such as logging in and finding settings.
+  - name: Assessments
+    description: Assessment-related api calls # Complete
+  - name: Courses
+    description: Courses-related API calls. # complete
+  - name: Dashboard
+    description: Interacting with dashboard applets (or as they like to call them, dashlets) # comp
+  - name: Direct Messages
+    description: Sending and receiving messages # comp
+  - name: Goals
+    description: Show the goals.
+  - name: Notices
+    description: View the notices!
+  - name: Portals
+    description: Loading the pain of portals # comp
+  - name: Reports
+    description: View your reports
+  - name: Timetable
+    description: Timetable APIs
+  - name: Misc
+    description: Things like the kitty on the 404 page and the mp3s for notifications
+paths:
+  # General
+  /seqta/student/load/subjects:
+    post:
+      tags:
+        - General
+      summary: Get subjects.
+      description: Returns your subjects
+      operationId: subjects
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - code: 2025SCS1
+                      subjects:
+                        - code: 08CHN20.6B
+                          classunit: 7636
+                          description: Chinese
+                          metaclass: 8110
+                          title: 08  Chinese
+                          programme: 4137
+                          marksbook_type: mixed
+                        - code: 8HAP
+                          classunit: 7967
+                          description: HAP
+                          metaclass: 8450
+                          title: '08 HAP Mathematics '
+                          programme: 4653
+                          marksbook_type: mixed
+                        - code: 8MTH.B
+                          classunit: 7438
+                          description: Mathematics
+                          metaclass: 7912
+                          title: '08 Mathematics '
+                          programme: 4297
+                          marksbook_type: mixed
+                        - code: 8DIG.B
+                          classunit: 7557
+                          description: Digital Technology
+                          metaclass: 8031
+                          title: 8 Digital Technology '25
+                          programme: 4502
+                          marksbook_type: mixed
+                        - code: 8HUM.B
+                          classunit: 7583
+                          description: Humanities
+                          metaclass: 8057
+                          title: Humanities
+                          programme: 4469
+                          marksbook_type: mixed
+                        - code: PC.S2
+                          classunit: 7501
+                          description: Pastoral Care Sion Middle
+                          metaclass: 7975
+                          title: Pastoral Care Sion Middle
+                          programme: 4565
+                          marksbook_type: numeric
+                        - code: 08PHD20.3C
+                          classunit: 7663
+                          description: Physical Education
+                          metaclass: 8137
+                          title: Physical Education
+                          programme: 4253
+                          marksbook_type: mixed
+                        - code: 8ENG.B
+                          classunit: 7553
+                          description: English
+                          metaclass: 8027
+                          title: Year 8 English (8B, MSA)
+                          programme: 4256
+                          marksbook_type: mixed
+                        - code: 8FOH.D
+                          classunit: 7992
+                          description: Food Technology
+                          metaclass: 8477
+                          title: Year 8 Food Technology  2024
+                          programme: 4671
+                          marksbook_type: mixed
+                        - code: 08MUS20.4A
+                          classunit: 7540
+                          description: Music Performance & Technology (FY)
+                          metaclass: 8014
+                          title: Year 8 Music Sem 1
+                          programme: 4649
+                          marksbook_type: numeric
+                        - code: 8REL10.B
+                          classunit: 7515
+                          description: Religious Education
+                          metaclass: 7989
+                          title: Year 8 Religious Education - Semester 1
+                          programme: 4491
+                          marksbook_type: mixed
+                        - code: 8SCI.B
+                          classunit: 7441
+                          description: Science
+                          metaclass: 7915
+                          title: Year 8 Science B
+                          programme: 4350
+                          marksbook_type: mixed
+                      description: 2025 Senior Campus Semester 1
+                      active: 1
+                      id: 30
+                  
+                  status: '200'
+  /seqta/student/load/prefs:
+    post:
+      tags:
+        - General
+      summary: Get preferences.
+      description: Returns your preferences.
+      operationId: prefs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                request: userPrefs
+                asArray: true
+                user: 1131
+              
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - name: timetable.subject.colour.8FOH.D
+                      id: 51820
+                      value: '#3f51b5'
+                  status: '200'
+  /seqta/student/branding/load:
+    post:
+      tags:
+        - General
+      summary: Get branding.
+      description: Returns school branding.
+      operationId: branding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                logo: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload: []
+                  status: '200'
+  /seqta/student/storage:
+    post:
+      tags:
+        - General
+      summary: Get storage details.
+      description: Returns storage details.
+      operationId: storage
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    component:
+                      database: OK
+                      system: OK
+                      userfiles: OK
+                      backups: OK
+                    timestamp: 1747546669244
+                  status: '200'
+  /seqta/student/load/forums:
+    post:
+      tags:
+        - General
+      summary: Get storage details.
+      description: Returns storage details.
+      operationId: forums
+      requestBody:
+        content:
+          application/json:
+            example:
+              mode: list
+              
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    forums: []
+                    me: Andrew E
+                  status: '200'
+                  
+  /seqta/student/releasealert/get:
+    post:
+      tags:
+        - General
+      summary: Get release alerts.
+      description: Returns release alerts.
+      operationId: ralerts
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    releasealerts: []
+                  status: '200'
+                  
+  /seqta/student/login:
+    post:
+      tags:
+        - General
+      summary: Get login information from SEQTA. REQUIRES THE `_ga` COOKIE.
+      description: Returns name, some info about the user and (if applicable) SAML information
+      operationId: updatePet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                mode: "normal"
+                query: null
+                redirect_url: 'any string'
+              
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    lastAccessedTime: Number
+                    personUUID: String
+                    meta:
+                      code: Number
+                      governmentID: Any
+                    clientIP: user identification
+                    saml:
+                      - autologin: Boolean
+                        request: the output of ms auth
+                        relaystate: the output of ms auth
+                        method: POST
+                        signature: secret b64 key
+                        slo: Boolean
+                        label: String
+                        sigalg: String
+                        url: the query for ms auth
+                    userDesc: String
+                    id: Number
+                    type: student
+                    userName: String
+                    userCode: String
+                    email: String
+                    status: '200'
+                  status: '200'
+  /seqta/student/photo/get:
+    get:
+      tags:
+        - General
+      summary: Get student
+      description: Returns an array of settings
+      operationId: get_photo_of_student
+      parameters:
+          - in: query
+            name: uuid
+            schema:
+              type: string
+              description: UUID of the user
+            required: true
+          - in: query
+            name: format
+            schema:
+              type: string
+              description: The resolution of the file
+              enum: [low, med, high]
+
+            required: true
+      responses:
+        '200':
+          description: The user's image
+          content:
+            image/jpeg:
+              schema:
+                example:
+                  - To protect the safety of people, no image was provided. It would return an image.
+  /seqta/student/heartbeat:
+    post:
+      tags:
+        - General
+      summary: Keep-alive the session
+      description: Returns the current data for the user
+      operationId: heartbeat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                timestamp: '2025-05-18 10:11:37.0'
+                hash: '#?page=/messages'
+        required: true
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                payload:
+                  identifier: any
+                  version: 2025.4.1-master-20250409-184
+                  uuid: 'your user uuid'
+                  notifications: []
+                  ts: '2025-05-18 10:16:37.08500'
+                status: '200'
+  /seqta/student/file/upload/xhr2:
+    post:
+      tags:
+        - General
+      summary: Upload a file using xhr2
+      description: The only way to upload a file
+      requestBody:
+        content:
+          manymimetypes:
+            schema:
+              example:
+                As it is a XHR2 upload, the data can't be shared here due to the nature of one.
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                payload:
+                  filename: literally anything.js
+                  context_uuid: 998955d6-60c6-44d2-98f6-13f086d8aa1e
+                  mimetype: text/html
+                  id: '674132'
+                  created_date: '2025-05-18T11:03:16.947'
+                  uuid: 'in most cases the same as the context_uuid'
+                  created_by: 1131
+                status: '200'
+              
+
+  /seqta/student/message/people:
+    post:
+      tags:
+        - General
+      summary: Get people
+      description: Get people!
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                mode: "can be: student, staff or tutor"
+        required: true
+                
+      responses:
+        '200':
+          description: be careful; the iterable can have lots of entries
+          content:
+            application/json:
+              example:
+                payload:
+                  - sub-school: Middle School
+                    firstname: Sammy
+                    house_colour: '#F2A900'
+                    year: '7'
+                    xx_display: Sammy Sample
+                    surname: Sample
+                    campus: S
+                    id: 1380
+                    rollgroup: LOL1
+                    house: LOL
+                status: '200'
+                
+  /seqta/student/themes/list:
+    post:
+      tags:
+        - General
+      summary: Get themes
+      description: T H E M E S.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                mode: "can be: student, staff or tutor"
+        required: true
+                
+      responses:
+        '200':
+          description: be careful; the iterable can have lots of entries
+          content:
+            application/json:
+              example:
+                payload:
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#fffbe0'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#fff'
+                    accentColour: '#eb6a30'
+                    uuid: 10bd4dc3-0fd4-42c1-8a02-d00e29cb126c
+                    cardBorderColour: rgba(0,0,0,0.1)
+                    fontFamily: '''ABeeZee'', ''Trebuchet MS'', ''Lucida Sans Unicode'', ''Lucida Grande'', ''Lucida Sans'', Arial, sans-serif'
+                    textColour: '#000'
+                    starred: false
+                    applyImage: false
+                    name: Cactus
+                    cardBackground: '#76c8c4'
+                    fontSize: 10pt
+                    documentBackground: '#063953 radial-gradient(at center, rgba(0,0,0,0), #000)'
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#ecf0f1'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#fff'
+                    accentColour: '#e74c3c'
+                    uuid: 64a8f249-b417-4645-96f7-22b079878a8d
+                    cardBorderColour: rgba(0,0,0,0.1)
+                    fontFamily: '''Segoe UI'', ''Lucida Sans Unicode'', ''Lucida Grande'', ''Lucida Sans'', Arial, sans-serif'
+                    textColour: '#2c3e50'
+                    starred: false
+                    applyImage: false
+                    name: Concise
+                    cardBackground: '#fff'
+                    fontSize: 9pt
+                    documentBackground: '#2c3e50'
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#fff'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#fff'
+                    accentColour: '#25b3fd'
+                    uuid: 8f8ce53c-ec1c-45a8-ab46-5e4a62d3604d
+                    cardBorderColour: '#eee'
+                    fontFamily: '''Trebuchet MS'', ''Lucida Sans Unicode'', ''Lucida Grande'', ''Lucida Sans'', Arial, sans-serif'
+                    textColour: '#000'
+                    starred: false
+                    applyImage: false
+                    name: Default
+                    cardBackground: '#f8f8f8'
+                    fontSize: 9pt
+                    documentBackground: '#f8f8f8'
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#000'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#fff'
+                    accentColour: '#25b3fd'
+                    uuid: 8ecaed7e-b664-4495-abae-f85bdb4b6d51
+                    cardBorderColour: '#222'
+                    fontFamily: '''Trebuchet MS'', ''Lucida Sans Unicode'', ''Lucida Grande'', ''Lucida Sans'', Arial, sans-serif'
+                    textColour: '#fff'
+                    starred: false
+                    applyImage: false
+                    name: Inverse
+                    cardBackground: '#111'
+                    fontSize: 9pt
+                    documentBackground: '#111'
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#edf7f2'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#fff'
+                    accentColour: '#96ca2d'
+                    uuid: 0f5cf27a-3d6c-459b-bbba-4090b78e9f7c
+                    cardBorderColour: '#96ca2d'
+                    fontFamily: '''Trebuchet MS'', ''Lucida Sans Unicode'', ''Lucida Grande'', ''Lucida Sans'', Arial, sans-serif'
+                    textColour: '#4c6617'
+                    starred: true
+                    applyImage: false
+                    name: Lime
+                    cardBackground: '#d6e6b6'
+                    fontSize: 9pt
+                    documentBackground: '#4c6617'
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#fff'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#000'
+                    accentColour: '#ffc20e'
+                    uuid: 13eb9b29-e075-420a-ac95-a28714409b87
+                    cardBorderColour: rgba(0,0,0,0.1)
+                    fontFamily: Quicksand, sans-serif
+                    textColour: '#000'
+                    starred: false
+                    applyImage: false
+                    name: Quicksand
+                    cardBackground: '#f8f8f8'
+                    fontSize: 10pt
+                    documentBackground: '#444 radial-gradient(at center, #444, #000)'
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#fffad5'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#fff'
+                    accentColour: '#bd4932'
+                    uuid: dbf8eb82-2b1f-43a8-a0f2-c3a479c207b4
+                    cardBorderColour: '#db9e36'
+                    fontFamily: '''Trebuchet MS'', ''Lucida Sans Unicode'', ''Lucida Grande'', ''Lucida Sans'', Arial, sans-serif'
+                    textColour: '#10222b'
+                    starred: true
+                    applyImage: false
+                    name: Rugby
+                    cardBackground: '#ffd34e'
+                    fontSize: 9pt
+                    documentBackground: '#105b63 repeating-linear-gradient(-1deg, #105b63, #105b63 8em, #ffd34e 8em, #ffd34e 16em, #bd4932 16em, #bd4932 24em, #105b63 24em)'
+                  - shared: true
+                    userfile: null
+                    moduleBackground: '#fff'
+                    cardShadow: true
+                    editable: false
+                    builtIn: true
+                    accentContrastColour: '#fff'
+                    accentColour: '#e95420'
+                    uuid: 14d88683-d33e-447b-8378-272d40b40237
+                    cardBorderColour: rgba(0,0,0,0.1)
+                    fontFamily: Ubuntu, san-serif
+                    textColour: '#000'
+                    starred: true
+                    applyImage: false
+                    name: Ubuntu
+                    cardBackground: '#f8f8f8'
+                    fontSize: 10pt
+                    documentBackground: '#77216f radial-gradient(at center, #77216f, #2c001e)'
+                status: '200'
+                
+                
+  /seqta/student/settings:
+    post:
+      tags:
+        - General
+      summary: Get settings
+      description: Returns an array of settings
+      operationId: settings
+      parameters:
+          - in: query
+            name: any
+            schema:
+              type: string
+              description: This can be anything. Just pass a space as it is required
+            required: true
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                payload:
+                  global.communications.phone.exit_code:
+                    value: String
+                  global.notifications.email.minimumAge:
+                    value: String
+                  global.ai.api.baseurl:
+                    value: https://ai.seqta.com/
+                  coneqt-s.events.contacts.enabled:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.events:
+                    value: enabled/disabled
+                  coneqt-s.messages.students.enabled:
+                    value: enabled/disabled
+                  coneqt-s.events.staff.enabled:
+                    value: enabled/disabled
+                  global.datacube:
+                    value: enabled/disabled
+                  global.folios:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.selfassessment:
+                    value: enabled/disabled
+                  coneqt-s.forum.photos:
+                    value: enabled/disabled
+                  global.ai.lessonplan:
+                    value: enabled/disabled
+                  coneqt-s.page.forums:
+                    value: enabled/disabled
+                  global.myed:
+                    value: enabled/disabled
+                  coneqt-s.page.folios:
+                    value: enabled/disabled
+                  coneqt-s.events.students.enabled:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.applications:
+                    value: enabled/disabled
+                  coneqt-s.events.tutors.enabled:
+                    value: enabled/disabled
+                  coneqt-s.page.reports:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.timetable:
+                    value: enabled/disabled
+                  coneqt-s.mediaRecorder.enabled:
+                    value: enabled/disabled
+                  coneqt-s.page.goals:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.electives:
+                    value: enabled/disabled
+                  coneqt-s.timetable.email:
+                    value: enabled/disabled
+                  global.microsoftTeams.pilot:
+                    value: enabled/disabled
+                  coneqt-s.filesize.limit:
+                    value: String
+                  coneqt-s.synergetic.community.pages.docs:
+                    value: enabled/disabled
+                  global.ai.credits:
+                    value: String
+                  coneqt-s.googleAnalytics: {}
+                  url.coneqt-s:
+                    value: String
+                  global.dashlet.summarised-assessment-feedback:
+                    value: enabled/disabled
+                  global.microsoftTeams.directoryId:
+                    value: String
+                  global.forums.usePrefName:
+                    value: enabled/disabled
+                  coneqt-s.page.notices:
+                    value: enabled/disabled
+                  attendance.defaults.time_from:
+                    value: String
+                  coneqt-s.synergetic.community.pages.accommodation:
+                    value: enabled/disabled
+                  global.ai.client.secret:
+                    value: String
+                  global.url.seqtaresources:
+                    value: String
+                  coneqt-s.assessments.customtext:
+                    value: enabled/disabled
+                  global.ai.api.token:
+                    value: token
+                  coneqt-s.forum.greeting:
+                    value: String
+                  global.requestedAbsences:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.absences:
+                    value: enabled/disabled
+                  global.datacube.dailyexport:
+                    value: enabled/disabled
+                  global.microsoftTeams.domainName:
+                    value: String
+                  coneqt-s.timetable.attendance:
+                    value: enabled/disabled
+                  attendance.defaults.time_to:
+                    value: String
+                  coneqt-s.messages.contacts.enabled:
+                    value: enabled/disabled
+                  global.microsoftTeams.applicationId:
+                    value: String
+                  coneqt-s.goals.message:
+                    value: String
+                  global.email.defaultFrom:
+                    value: String
+                  global.microsoftTeams.clientSecret:
+                    value: String
+                  coneqt-s.page.documents:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.results:
+                    value: enabled/disabled
+                  coneqt-s.synergetic.community.pages.excursions:
+                    value: enabled/disabled
+                  global.microsoftTeams.features:
+                    value: enabled/disabled
+                  global.email.feedbackExtra:
+                    value: String
+                  coneqt-s.courses:
+                    value: enabled/disabled
+                  global.oneDrive.clientId:
+                    value: String
+                status: '200'
+  
+  
+  
+  # DIRECT MESSAGES
+    
+  /seqta/student/load/message:
+    post:
+      tags:
+        - Direct Messages
+      summary: |-
+        MULTI-ENDPOINT: Get labels, messages, or a message
+      description: |-
+        An endpoint to do multiple things: a Multi-endpoint!
+        # How do I use this endpoint?
+        There are 3 request bodies and 3 response bodies. There will always be a body and a response that match in name. Choose them both to see the result.
+      operationId: load_messages_1
+      requestBody:
+        content:
+          application/json:
+            examples:
+              labels:
+                value:
+                  action: labels
+              get_messages:
+                value:
+                  searchValue: ''
+                  sortBy: date
+                  sortOrder: desc
+                  action: list
+                  label: inbox
+                  offset: 0
+                  limit: 100
+                  datetimeUntil: null
+              get_a_message:
+                value:
+                  action: message
+                  id: 69420
+        required: true
+      responses:
+        '200':
+          description: The responses
+          content:
+            application/json:
+              examples:
+                labels:
+                  description: Outcome of iterables is dependent on what labels your school has. This is the most common arrangement
+                  value:
+                    payload:
+                      - unread: 0
+                        label: inbox
+                      - unread: 0
+                        label: outbox
+                      - unread: 0
+                        label: trash
+                      - unread: 0
+                        label: starred
+                    status: '200'
+                get_messages:
+                  description: NOTE&colon; Expect more than one iterable. It is defined by the `limit` parameter in the request.
+                  value:
+                    payload:
+                    hasMore: true
+                    messages:
+                      - date: '2025-05-16 11:05:30.500763+09:30'
+                        attachments: false
+                        read: 1
+                        sender: Mr. Smith
+                        subject: Exam practice sheets
+                        sender_type: staff
+                        attachmentCount: 0
+                        id: 69420
+                        sender_id: 940
+                        participants:
+                          - name: John Sample
+                            photo: 14566782-b600-40cf-a76d-537b198578e9
+                            type: student
+                    ts: '2025-05-18 10:14:39.71900'
+                    status: '200'
+                get_a_message:
+                  description: The response of one email
+                  value:
+                    payload:
+                    date: '2025-05-16 10:22:05.648225+09:30'
+                    blind: false
+                    read: true
+                    subject: 'file'
+                    sender_type: student
+                    contactMeta: []
+                    sender_id: 1679
+                    sender_photo: 8c82e311-9701-47fa-9c87-16b551ea1144
+                    studentMeta: []
+                    starred: false
+                    contents: ''
+                    sender: Some One
+                    files:
+                      - filename: 'file.json'
+                        size: '1'
+                        context_uuid: 'uuid'
+                        mimetype: application/json
+                        id: 599042
+                        created_date: '2025-05-16 10:22:03.599289+09:30'
+                        uuid: 'same as context_uuid most of the time'
+                        created_by: '69'
+                    id: 635100
+                    participants:
+                      - read: 1
+                        name: Sammy Smith
+                        photo: 14566782-b600-40cf-a76d-537b198578e9
+                        id: 70
+                        type: student
+                    status: '200'
+  
+  /seqta/student/save/message:
+    post:
+      tags:
+        - Direct Messages
+      summary: Send a message to a user
+      description: Sends a message to someone. Returns a status code and some info.
+      operationId: send_message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                subject: e
+                contents: e
+                participants:
+                  - staff: true
+                    id: 589
+                blind: false
+                files: ['same as the loading message one']
+        required: true          
+                
+      responses:
+        '200':
+          description: The response. The `id` property is the message id, not the receipent's id.
+          content:
+            application/json:
+              example:     
+                payload:
+                  subject: e
+                  recipients: 1
+                  id: 635615
+                status: '200'
+  
+  # ASSESSMENTS
+  /seqta/student/assessment/list/upcoming:
+    post:
+      tags:
+        - Assessments
+      summary: Get assessments
+      description: Get the upcoming assessments
+      operationId: get_assessments_upcoming
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                student: 69
+              
+        required: true          
+                
+      responses:
+        '200':
+          description: The response. The `id` property is the message id, not the receipent's id.
+          content:
+            application/json:
+              example:     
+                payload:
+                  - expectationsCompleted: false
+                    metaclassID: 8137
+                    code: 08PHD20.3C
+                    subject: Physical Education
+                    reflectionsEnabled: false
+                    availability: details
+                    title: 'Healthy Nutrition and Physical Activity '
+                    programmeID: 4253
+                    reflectionsCompleted: false
+                    overdue: false
+                    due: '2025-06-11'
+                    hasFeedback: false
+                    expectationsEnabled: false
+                    graded: true
+                    id: 32340
+                    status: UPCOMING
+                status: '200'
+                
+  /seqta/student/assessment/get:
+    post:
+      tags:
+        - Assessments
+      summary: Get assessments for a particular subject
+      description: Retrieve an array of assessments for a subject
+      operationId: assessment_get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                assessment: 32703
+                student: 1131
+                metaclass: 7912
+        required: true      
+      responses:
+        '200':
+          description: The response
+          content:
+            application/json:
+              example:
+                payload:
+                  marked: false
+                  engagement: null
+                  enabledCustomText: false
+                  enabledPostSubmission: false
+                  criteria:
+                    - engagement: null
+                      emblems: null
+                      description: null
+                      syllabi: null
+                      rubric:
+                        mode: EXPLANATORY
+                        flexible: true
+                        id: 22743
+                        lines:
+                          - descriptors:
+                              - id: 421910
+                                content: Comprehensive knowledge and understanding of concepts and relationships.
+                              - id: 421911
+                                content: Some depth of knowledge and understanding of concepts and relationships.
+                              - id: 421912
+                                content: Generally competent knowledge and understanding of concepts and relationships.
+                              - id: 421913
+                                content: Basic knowledge and some understanding of concepts and relationships.
+                              - id: 421914
+                                content: Limited knowledge or understanding of concepts and relationships.
+                            deleted: false
+                            id: 94475
+                            title: CT1
+                            content: null
+                      rubricScore: null
+                      id: 34685
+                      label: Achievement
+                      results: null
+                      target: 53
+                  customText: null
+                  description: blah blah blah
+                  resources: null
+                  checklist: null
+                  wispSubmissionStats: null
+                  customTextLabel: null
+                  submissionSettings:
+                    fileSubmissionEnabled: false
+                    allowPostSubmission: false
+                    applicationUuids: null
+                    overdueDays: null
+                    wispAssessmentEnabled: false
+                    allowOverdue: false
+                  availableGrades:
+                    - A+
+                    - A
+                    - A-
+                    - B+
+                    - B
+                    - B-
+                    - C+
+                    - C
+                    - C-
+                    - D+
+                    - D
+                    - D-
+                    - E+
+                    - E
+                    - E-
+                    - 'N'
+                    - NA
+                    - P
+                  engagementlevel: assessment
+                  engagementSettings:
+                    reflectedCommentPrompt: null
+                    enabledOptions: []
+                    expectedCommentPrompt: null
+                  locked: false
+                status: '200'
+                
+  /seqta/student/assessment/submissions/get:
+    post:
+      tags:
+        - Assessments
+      summary: Get assessment submissions for a particular subject
+      description: Retrieve an array of assessments for a subject
+      operationId: assessment_submissions_get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                assessment: 32703
+                student: 1131
+                metaclass: 7912
+        required: true      
+      responses:
+        '200':
+          description: The response
+          content:
+            application/json:
+              examples:
+                no_submissions:
+                  value:
+                    payload: []
+                    status: '200'
+                with_submissions:
+                  value:
+                    payload:
+                      - filename: stuff.pptx
+                        size: '20607612'
+                        context_uuid: 076136c1-b517-4733-a652-9f895fd070b1
+                        readOnly: true
+                        mimetype: application/vnd.openxmlformats-officedocument.presentationml.presentation
+                        id: 656855
+                        created_date: '2025-03-27 10:58:11.554867+10:30'
+                        uuid: 076136c1-b517-4733-a652-9f895fd070b1
+                        created_by: '1131'
+                    status: '200'
+                  
+  /seqta/student/assessment/submissions/save:
+    post:
+      tags:
+        - Assessments
+      summary: "MULTI-ENDPOINT: Modify the submissions"
+      description: |-
+        Add/modify/delete a submission.
+        # How do I use this endpoint?
+        There are three request bodies and two response bodies.
+        - The add body matches to the add response
+        - The remove and undo_remove bodies match to the erase body
+      operationId: assessment_submissions_save
+      requestBody:
+        content:
+          application/json:
+            examples:
+              add:
+                value: 
+                  action: link
+                  assID: 35333
+                  metaclass: 8110
+                  files:
+                    - 674147
+              remove:
+                value:
+                  action: erase
+                  assID: 35333
+                  metaclass: 8110
+                  fileID: '674147'
+                  undo: false
+              undo_remove:
+                value:
+                  action: erase
+                  assID: 35333
+                  metaclass: 8110
+                  fileID: '674147'
+                  undo: true
+        required: true          
+              
+      responses:
+        '200':
+          description: The response
+          content:
+            application/json:
+              examples:
+                add:
+                  value:
+                    payload:
+                      - userfile: 674147
+                        filename: 'literally-anything.html'
+                        size: '325'
+                        context_uuid: 258b4761-8c1a-4918-b7f5-dcb318aae481
+                        mimetype: text/html
+                        id: 674147
+                        created_date: '2025-05-18 13:21:42.775965+09:30'
+                        uuid: 'usually the same as context_uuid'
+                        created_by: '1131'
+                    status: '200'
+                    
+                erase:
+                  value:
+                    status: '200'
+  
+  # COURSES
+  /seqta/student/load/courses:
+    post:
+      tags:
+        - Courses
+      summary: View the courses of a subject
+      description: Returns a course. 
+      operationId: courses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                programme: '4137'
+                metaclass: '8110'
+              
+                
+        required: true    
+      responses:
+        '200':
+          description: Successful operation. VERY BIG ENDPOINT
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    c: 2025SCS1.08CHN20.6B [2025SCS1]
+                    cf: []
+                    im: 8b90cfa8-c144-4104-95a6-12af29511851
+                    d:
+                      - t: 1
+                        w: 1
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-01-28'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-01-30'
+                            e: '12:45:00'
+                        'n': 0
+                      - t: 1
+                        w: 2
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-04'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-06'
+                            e: '12:45:00'
+                        'n': 1
+                      - t: 1
+                        w: 3
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-11'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-13'
+                            e: '12:45:00'
+                        'n': 2
+                      - t: 1
+                        w: 4
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-18'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-20'
+                            e: '12:45:00'
+                        'n': 3
+                      - t: 1
+                        w: 5
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-25'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-02-27'
+                            e: '12:45:00'
+                        'n': 4
+                      - t: 1
+                        w: 6
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-04'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-06'
+                            e: '12:45:00'
+                        'n': 5
+                      - t: 1
+                        w: 7
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-11'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-13'
+                            e: '12:45:00'
+                        'n': 6
+                      - t: 1
+                        w: 8
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-18'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-20'
+                            e: '12:45:00'
+                        'n': 7
+                      - t: 1
+                        w: 9
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-25'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-03-27'
+                            e: '12:45:00'
+                        'n': 8
+                      - t: 1
+                        w: 10
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-04-01'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-04-03'
+                            e: '12:45:00'
+                        'n': 9
+                      - t: 1
+                        w: 11
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-04-08'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-04-10'
+                            e: '12:45:00'
+                        'n': 10
+                      - t: 2
+                        w: 1
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-04-29'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-01'
+                            e: '12:45:00'
+                        'n': 11
+                      - t: 2
+                        w: 2
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-06'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-08'
+                            e: '12:45:00'
+                        'n': 12
+                      - t: 2
+                        w: 3
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-13'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-15'
+                            e: '12:45:00'
+                        'n': 13
+                      - t: 2
+                        w: 4
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-20'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-22'
+                            e: '12:45:00'
+                        'n': 14
+                      - t: 2
+                        w: 5
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-27'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-05-29'
+                            e: '12:45:00'
+                        'n': 15
+                      - t: 2
+                        w: 6
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-03'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-05'
+                            e: '12:45:00'
+                        'n': 16
+                      - t: 2
+                        w: 7
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-10'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-12'
+                            e: '12:45:00'
+                        'n': 17
+                      - t: 2
+                        w: 8
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-17'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-19'
+                            e: '12:45:00'
+                        'n': 18
+                      - t: 2
+                        w: 9
+                        l:
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-24'
+                            e: '12:45:00'
+                          - p: L3
+                            s: '11:45:00'
+                            d: '2025-06-26'
+                            e: '12:45:00'
+                        'n': 19
+                    document: '{"document":{"modules":[{"uuid":"1641cf87-ae08-4bcb-832d-d5709d84d0c5","type":"be8a6c4b-25b7-4129-bfcc-040ce937fab3","parentModule":null,"nextModule":null,"prevModule":null},{"uuid":"a5edc3eb-c3b5-48a1-b52c-63ceb731d29d","type":"c44f844e-cdd1-4462-951f-f8a1ad02c3b0","prevModule":"e4eff882-f9d5-4321-ba99-5383ad4a8201","nextModule":null,"parentModule":"1641cf87-ae08-4bcb-832d-d5709d84d0c5"},{"uuid":"e4eff882-f9d5-4321-ba99-5383ad4a8201","type":"c44f844e-cdd1-4462-951f-f8a1ad02c3b0","prevModule":"00c86a39-2e99-464d-a5a1-6fdf225d041f","nextModule":"a5edc3eb-c3b5-48a1-b52c-63ceb731d29d","parentModule":"1641cf87-ae08-4bcb-832d-d5709d84d0c5"},{"uuid":"6d1fc1c5-156f-4faf-bb8f-50b2374c1a3b","type":"c44f844e-cdd1-4462-951f-f8a1ad02c3b0","prevModule":null,"nextModule":"e51bdd78-5502-4ab7-bb71-1df58fdaf9df","parentModule":"1641cf87-ae08-4bcb-832d-d5709d84d0c5","content":{"value":"CHINESE YR 8"}},{"uuid":"e51bdd78-5502-4ab7-bb71-1df58fdaf9df","type":"a0ce95ee-44dc-44e0-a35c-53f7d51fef05","prevModule":"6d1fc1c5-156f-4faf-bb8f-50b2374c1a3b","nextModule":"5d7e1002-160c-422f-abd9-734af0d7557b","parentModule":"1641cf87-ae08-4bcb-832d-d5709d84d0c5","content":{"content":{"blocks":[{"key":"7inq2","text":" SUBJECT Ohttps://teach.cbc.sa.edu.au/seqta/ta/lti/launch?app=8ea1ff5f-5945-4ed8-b343-4cfb87f8028a&programmeId=1044VERVIEW","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":10,"style":"BOLD"},{"offset":115,"length":7,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"2knjm","text":"An introduction to both Chinese language and culture. Students make cross-curricular connections and explore intercultural experiences and perspectives, particularly through comparison with Chinese. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"2ftlr","text":"By the end of Year 8, students initiate and sustain interactions in familiar situations to share personal information, seek clarification, transact and make arrangements. Students employ language and culturally specific gestures appropriately for the role, audience and purpose of interaction. They respond to and create short, modified, informative and imaginative texts for known audiences. Students are also aware that literal translation between languages is not always possible, and that aspects of interpretation and translation are affected by context, culture, and intercultural experience. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4svr8","text":"Texts and Resources ","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":19,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"c1idh","text":"The Year 8 Chinese textbook is ‘Chinese Made Easy 1’, which is supported by a CD for home use, a workbook and audio material for classroom presentation and practice. Students listen to, read, view and interact with a variety of short modified informative, imaginative and persuasive Chinese texts, including texts that are valued within Chinese culture and community. Texts written in characters may include a Pinyin glossary or character/vocabulary lists as appropriate. ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"b51re","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"alignment":"left"}},{"key":"e0gil","text":"Units/Topics","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"alignment":"left"}},{"key":"8c5gd","text":"Assessment Requirements: ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"alignment":"left"}},{"key":"708mq","text":"Skills and Aplications Takss: ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"alignment":"left"}},{"key":"3g6fp","text":"Investigation Folio-","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"alignment":"left"}}],"entityMap":{}},"subcontent":{}}},{"uuid":"5d7e1002-160c-422f-abd9-734af0d7557b","type":"c082b45f-abf5-41fa-9c15-74233ab52c91","prevModule":"e51bdd78-5502-4ab7-bb71-1df58fdaf9df","nextModule":"7981dbec-5994-4e11-b142-7e3932e15de3","parentModule":"1641cf87-ae08-4bcb-832d-d5709d84d0c5","content":{"AdvanceLayout":{"col1":["290068c5-de3a-41c0-88f7-c85d406fae0c"],"col2":["89e00d91-f8dd-44c8-8ce7-fe73ee569490"],"col3":[],"layoutStyle":"equal-widths"}}},{"uuid":"290068c5-de3a-41c0-88f7-c85d406fae0c","type":"a0ce95ee-44dc-44e0-a35c-53f7d51fef05","prevModule":"89e00d91-f8dd-44c8-8ce7-fe73ee569490","nextModule":null,"parentModule":"5d7e1002-160c-422f-abd9-734af0d7557b","content":{"content":{"blocks":[{"key":"817ri","text":"LENGTH","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":6,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"6rvn4","text":"One Year","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"alignment":"left"}},{"key":"c4vec","text":"     ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"88gcq","text":"Students must choose one language subject (Chinese or Italian). ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}},"subcontent":{}}},{"uuid":"89e00d91-f8dd-44c8-8ce7-fe73ee569490","type":"a0ce95ee-44dc-44e0-a35c-53f7d51fef05","prevModule":null,"nextModule":"290068c5-de3a-41c0-88f7-c85d406fae0c","parentModule":"5d7e1002-160c-422f-abd9-734af0d7557b","content":{"content":{"blocks":[{"key":"cl96g","text":"ASSESSMENT REQUIREMENTS","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":23,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"2aqco","text":" ","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"2si32","text":"Communicating – aural, written and oral ","type":"unordered-list-item","depth":0,"inlineStyleRanges":[{"offset":0,"length":14,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"1rqv","text":"Understanding – vocabulary, grammar, culture ","type":"unordered-list-item","depth":0,"inlineStyleRanges":[{"offset":0,"length":14,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"db5f9","text":"Informing – share, summarise ideas and information ","type":"unordered-list-item","depth":0,"inlineStyleRanges":[{"offset":0,"length":10,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"75l4r","text":"Creating – written and oral ","type":"unordered-list-item","depth":0,"inlineStyleRanges":[{"offset":0,"length":9,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"6lcfn","text":"Translating – aural, written and oral ","type":"unordered-list-item","depth":0,"inlineStyleRanges":[{"offset":0,"length":12,"style":"BOLD"}],"entityRanges":[],"data":{}}],"entityMap":{}},"subcontent":{}}},{"uuid":"00c86a39-2e99-464d-a5a1-6fdf225d041f","type":"189df2ac-6332-4057-99d0-5658187398d4","prevModule":"7981dbec-5994-4e11-b142-7e3932e15de3","nextModule":"e4eff882-f9d5-4321-ba99-5383ad4a8201","parentModule":"1641cf87-ae08-4bcb-832d-d5709d84d0c5"},{"uuid":"7981dbec-5994-4e11-b142-7e3932e15de3","type":"189df2ac-6332-4057-99d0-5658187398d4","prevModule":"5d7e1002-160c-422f-abd9-734af0d7557b","nextModule":"00c86a39-2e99-464d-a5a1-6fdf225d041f","parentModule":"1641cf87-ae08-4bcb-832d-d5709d84d0c5","content":{"id":[1650],"showCode":true,"showStrand":true,"showArea":true,"showSet":true,"showDetails":true,"showContentCode":true,"showContentYear":true,"showContentDetails":true,"selectedColour":"inherit","selectedBackgroundColour":"inherit","colours":{"title":{"colourAlpha":1,"backgroundColourAlpha":1,"colour":"inherit","backgroundColour":"inherit"},"code":{"colourAlpha":1,"backgroundColourAlpha":1,"colour":"inherit","backgroundColour":"inherit"},"area":{"colourAlpha":1,"backgroundColourAlpha":1,"colour":"inherit","backgroundColour":"inherit"},"set":{"colourAlpha":1,"backgroundColourAlpha":1,"colour":"inherit","backgroundColour":"inherit"},"strand":{"colourAlpha":0.8,"backgroundColourAlpha":1,"colour":"inherit","backgroundColour":"inherit"},"details":{"colourAlpha":0.5,"backgroundColourAlpha":1,"colour":"inherit","backgroundColour":"inherit"}},"syllabusContent":{"1650":[1639,1638,1637,1636,1633,1625,1624,1623,1622,1619,1591,1590,1589,1588,1577,1576,1575,1574,1573,1572,1568,1567,1566,1565,1545,1544,1543,1542,1541,1537]}}}],"theme":"8f8ce53c-ec1c-45a8-ab46-5e4a62d3604d"}}'
+                    i: 4137
+                    coneqtLessonVisibility: past
+                    m: 8110
+                    o: ''
+                    r: 1
+                    t: 08  Chinese
+                    u: 4638b6f4-3849-42f9-ab8b-eb914a455a96
+                    w:
+                      - - t: Introduction
+                          i: 509679
+                          l: ''
+                          'n': 0
+                          o: "<p>Please bring your Chinese notebook to class. 10mm*10mm graphic book.&nbsp;</p>\n<p>Welcome to Year 8 Chinese:&nbsp;</p>\n<ul>\n\t<li>Teacher's introduction</li>\n\t<li>Class Expectation</li>\n\t<li>Introduce yourself in Chinese 我是 （Wǒ shì-I am+ name)&nbsp;</li>\n</ul>\n<p>Teamwork: What do you know about China/Chinese? Chinese New Year Quiz</p>\n<p>Chinese New Year Greeting:&nbsp;</p>\n<p>新年快乐， 恭喜发财&nbsp; （<span class=\"Y2IQFc\">Xīnnián kuàilè， gōngxǐ fācái-Happy New Year and Wish you prosperity and wealth)</span></p>\n<div class=\"tw-ta-container F0azHf tw-lfl\" style=\"overflow: hidden; position: relative; outline: 0px; direction: ltr; color: rgb(32, 33, 36); font-family: arial, sans-serif; font-size: 0px; background-color: rgb(255, 255, 255);\">\n</div>\n<p><grammarly-extension class=\"cGcvT\" data-grammarly-shadow-root=\"true\" style=\"mix-blend-mode: darken; position: absolute; top: 0px; left: 0px; pointer-events: none; z-index: 2;\"> </grammarly-extension></p>\n<div data-grammarly-part=\"highlights\" style=\"position: absolute; top: 0px; left: 0px;\">\n\t<div style=\"box-sizing: content-box; top: -2px; left: 0px; width: 222px; height: 36px; position: relative; pointer-events: none; overflow: hidden; border: 0px; border-radius: 0px; padding: 0px; margin: 0px;\">\n\t\t<div style=\"position: absolute; top: 0px; left: 0px;\">\n\t\t\t<div style=\"height: 756px; width: 1502px;\">\n\t\t\t\t<span class=\"Y2IQFc\">Xīnnián kuàilè gōngxǐ fācá</span>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n<div class=\"tw-ta-container F0azHf tw-lfl\" id=\"tw-source-text-container\" style=\"overflow: hidden; position: relative; outline: 0px; direction: ltr; color: rgb(32, 33, 36); font-family: arial, sans-serif; font-size: 0px; background-color: rgb(255, 255, 255);\">\n\t<grammarly-extension class=\"cGcvT\" data-grammarly-shadow-root=\"true\" style=\"mix-blend-mode: darken; position: absolute; top: 0px; left: 0px; pointer-events: none; z-index: 2;\">\n\t<div data-grammarly-part=\"highlights\" style=\"position: absolute; top: 0px; left: 0px;\">\n\t\t<div style=\"box-sizing: content-box; top: -2px; left: 0px; width: 222px; height: 36px; position: relative; pointer-events: none; overflow: hidden; border: 0px; border-radius: 0px; padding: 0px; margin: 0px;\">\n\t\t\t<div style=\"position: absolute; top: 0px; left: 0px;\">\n\t\t\t\t<div style=\"height: 756px; width: 1502px;\">\n\t\t\t\t\t<span class=\"Y2IQFc\">Xīnnián kuàilè gōngxǐ fācá</span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div></grammarly-extension>\n</div>"
+                        - t: Introducaion Continues
+                          h: ''
+                          i: 509702
+                          l: ''
+                          'n': 1
+                          o: "<ul>\n\t<li>Teacher's introduction</li>\n\t<li>Class Expectation</li>\n\t<li>Introduce yourself in Chinese 我是 （Wǒ shì-I am+ name)&nbsp;</li>\n</ul>Teamwork: What do you know about China/Chinese? Chinese New Year Quiz<br>\nChinese New Year Greeting:&nbsp;<br>\n新年快乐， 恭喜发财&nbsp; （Xīnnián kuàilè， gōngxǐ fācái-Happy New Year and Wish you prosperity and wealth)<br>\n<br>\nYear, Month, Date in Chinese<br>\n<br>\nNumbers 1-100, 1000, 10000, 0\n<div>\n</div>"
+                      - - t: 'Pinyin, Characters and Numbers '
+                          h: ''
+                          i: 509680
+                          l: ''
+                          'n': 0
+                          o: "<p><strong>Checking:&nbsp;</strong></p>\n<p>Do you have the 10mm*10mm graphic notebook?&nbsp;<br>\n\t<br>\n\tAre you able to write and read today's date in Chinese</p>\n<p><strong>Lesson content:&nbsp;</strong><br>\n\t<br>\n\tClass number activity: Number in Chinese-Checking ( 0-100, 1000, 10000)</p>\n<p>Pinyin is the system of symbols for the phonetic notation of all Chinese characters. Each Chinese character has its own&nbsp;syllable.&nbsp;</p>\n<p>There are 4 tones in the Chinese pinyin system.&nbsp;</p>\n<p>What is Pinyin</p>\n<p><a href=\"https://www.youtube.com/watch?v=q2hrlAGewvY\" target=\"_blank\">What is Pinyin and how to read Chinese</a></p>\n<p><a href=\"https://www.youtube.com/watch?v=0Rb528mMWJM&amp;t=24s\" target=\"_blank\">If English had Chinese tones</a></p>\n<p>How to understand Chinese characters</p>\n<p><a href=\"https://www.youtube.com/watch?v=qR72RnEwl0M\" target=\"_blank\">How to read Chinese-Ted</a></p><p>Challenge:&nbsp;<br>\n\tAccording to the video&nbsp;<a href=\"https://www.youtube.com/watch?v=F8PF7oyXwt0&amp;t=25s\" target=\"_blank\">The Building Blocks of Chinese Characters</a></p>\n<p>can you list all radicals and their meanings from the video clip?&nbsp;</p>"
+                        - t: 'Pinyin, Characters and Numbers '
+                          h: ''
+                          i: 509700
+                          l: ''
+                          'n': 1
+                          o: "<p><strong>1. class activity: </strong>form the number</p>\n<p><strong>2. Radicals:&nbsp;</strong><br>\n\t<br>\n\tList the five from the previous lesson: female, water, tree, grass, mouth<br>\n\t<br>\n\tFollow the video to record the other 10&nbsp;<br>\n\t<br>\n\t<a href=\"https://www.youtube.com/watch?v=3llQG-0D4lY\" target=\"_blank\">15 Most common radicals</a></p>\n<p><strong>3. Number practice:&nbsp;</strong></p>\n<p>1-100, 1000, 10000<br>\n\t<br>\n\t<strong>Classwork: </strong>Research five aspects of China. Retell the facts with numerical evidence and pronounce the numbers in Chinese. For example: China has 二十三 provinces。五aotonomous regions, 四 municipalities, and 二 Special administrative regions.&nbsp;<br>\n\t<br>\n\tPlease write your sentences in the notebook. You will need to report back to the class at the end of the lesson.&nbsp;</p>"
+                      - - r:
+                            - userfile: 504377
+                              filename: Year 8 Worksheet-Numbers.docx
+                              t: Year 8 Worksheet-Numbers.docx
+                              size: '19796'
+                              context_uuid: c1ebbeca-325d-4d98-96e7-18daef2c2e14
+                              i: 193581
+                              mimetype: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                              created_date: '2024-02-12 15:15:54.019467+10:30'
+                              uuid: c1ebbeca-325d-4d98-96e7-18daef2c2e14
+                              created_by: '42'
+                          t: Class Quiz ( Week 1,2) Introduce radical for Chinese characters
+                          i: 509681
+                          l: ''
+                          'n': 0
+                          o: |-
+                            <p>1. Character and Number Sheet:&nbsp;</p>
+                            <p>The students are encouraged to complete the task sheet without their notebooks. However, they still have access to the notebooks. Students will need to complete the task sheet individually in a timely manner.&nbsp;</p>
+                            <p>2. Introduce Basic characters and radicals</p>
+                            <p>3. Continue with speaking in Chinese&nbsp;</p>
+                            <p>&nbsp; &nbsp; How are you?- ni hao ma</p>
+                            <p>&nbsp; &nbsp; &nbsp;I am very good- wo hen hao.&nbsp;</p>
+                            <p>&nbsp; &nbsp; &nbsp;I am ok-Mama huhu</p>
+                            <p>&nbsp; &nbsp; &nbsp;I am not good.- wo bu hao</p>
+                            <p>&nbsp; &nbsp; &nbsp;What about you? -ni ne?&nbsp;</p>
+                        - t: Simple character continues
+                          h: ''
+                          i: 509701
+                          l: ''
+                          'n': 1
+                          o: "<p>1. Today's date in Chinese<br>\n\t<br>\n\t2. Revise for radicals and simple characters&nbsp;<br>\n\t<br>\n\t&nbsp; &nbsp;Mouth, People, Big, Sky/Day, Fire, Small, Above, Below<br>\n\t<br>\n\t<br>\n\t<br>\n\t3. Speaking in Chinese<br>\n\t<br>\n\tAccording to video 1-4, create a conversation with your partner and report back to class.&nbsp;<br>\n\t<br>\n\t&nbsp;&nbsp;<br>\n\t<br>\n\t&nbsp;&nbsp;<a href=\"https://www.youtube.com/watch?v=LrNkgDVrKEw&amp;list=PLrYgra2FrMh_jGBcMmNWPnSh-kHwGiaXG&amp;index=1\" target=\"_blank\">Chinese Conversations</a></p>"
+                      - - r:
+                            - userfile: 239393
+                              filename: Basic Radicals.pdf
+                              t: Basic Radicals.pdf
+                              size: '852996'
+                              context_uuid: 7d4790c2-152a-4c2a-b9cb-6ba23f716a6f
+                              i: 193580
+                              mimetype: application/pdf
+                              created_date: '2022-02-21 08:32:48.555395+10:30'
+                              uuid: 7d4790c2-152a-4c2a-b9cb-6ba23f716a6f
+                              created_by: '42'
+                          t: Basic Radicals in Chinese
+                          i: 509682
+                          l: ''
+                          'n': 0
+                          o: "<p><strong>Lesson Sequence:&nbsp;</strong><br>\n\t<br>\n\t<strong>1.</strong> <strong>Speaking Practice</strong> (Memorise) in pairs: report back to Ms Wen in class next lesson</p>\n<pre data-placeholder=\"\" dir=\"ltr\" id=\"tw-source-rmn\">Nǐ hǎo\nnǐ hǎo\nnǐ hǎo ma? \nWǒ hěn hǎo, xièxiè, nǐ ne? \nWǒ ye hěn hǎo. Xièxiè. \nNǐ jiào shénme míngzì? \nWǒ jiào————, nǐ ne? \nWǒ jiào——————. \nHěn gāoxìng rènshí nǐ. \nHěn gāoxìng rènshí nǐ\nzàijiàn\nzàijiànKey words: Also-ye, Happy-gaoxing, very-henDo you understand the converstaion? can you have a conversatin with your partner without notes? </pre>\n<p><strong>2. Learning Radicals:</strong><br>\n\t<br>\n\tRadical: The Chinese language uses radicals, which are the <strong>graphical components</strong> of the Chinese character ( giving partial meaning). They are <strong>essentially building blocks</strong> that appear within characters, making them easier to remember and understand.&nbsp;</p>\n<p>More characters:&nbsp;<br>\n\t<br>\n\tWatch the video on your own laptop with headphones or mute. Copy down the 20 radicals in your notebook.&nbsp;<br>\n\t<br>\n\t<a href=\"https://www.youtube.com/watch?v=3FizmFTaZPw\" target=\"_blank\">Top 20 Chinese radicals</a><br>\n\t&nbsp;</p>"
+                        - r:
+                            - userfile: 641048
+                              filename: Basic Radicals.pdf
+                              t: Basic Radicals.pdf
+                              size: '852996'
+                              context_uuid: 0718e9cd-c2b9-4213-b629-069bbb83eb1d
+                              i: 220198
+                              mimetype: application/pdf
+                              created_date: '2025-02-18 14:24:48.68989+10:30'
+                              uuid: 0718e9cd-c2b9-4213-b629-069bbb83eb1d
+                              created_by: '42'
+                          t: Basic Radicals in Chinese
+                          h: ''
+                          i: 509719
+                          l: ''
+                          'n': 1
+                          o: "<p>Intention:&nbsp;<br>\n\t<br>\n\tUnderstand as many radicals as possible.&nbsp;<br>\n\t<br>\n\tWork in groups to introduce simple characters.&nbsp;<br>\n\t<br>\n\tLesson sequence:&nbsp;<br>\n\t<br>\n\t1. Complete the oral test in class.&nbsp;<br>\n\t<br>\n\t2. Work in groups to introduce the strock order, pronunciation and simple characters. Each group choose 5 characters. You must have activities to lead the class to practise and memorise the characters.&nbsp;<br>\n\t<br>\n\te.g.&nbsp;<br>\n\t<br>\n\tGroup 1： 你， 我， 他， 她， 它<br>\n\t<br>\n\tGroup 2:&nbsp; &nbsp;是， 不是， 有，没有<br>\n\t<br>\n\tGroup 3:&nbsp; &nbsp; 喜欢， 不喜欢<br>\n\t<br>\n\tGroup 4:&nbsp; &nbsp; 岁 ， 几岁， 你几岁，我10岁<br>\n\t<br>\n\tGroup 5:&nbsp; &nbsp;叫， 姓， 名字<br>\n\t<br>\n\tGroup 6:&nbsp; &nbsp;们， 我们， 你们， 的， 我的，<br>\n\t&nbsp;</p>"
+                      - - t: 'Class Assessment: 中国， 北京'
+                          i: 509683
+                          l: ''
+                          'n': 0
+                          o: "<p><strong data-end=\"73\" data-start=\"64\">Task:</strong><br>\n\t<br data-end=\"76\" data-start=\"73\">\n\tStudents will have <strong data-end=\"108\" data-start=\"95\">two weeks</strong> to research and create an <strong data-end=\"186\" data-start=\"135\">information brochure or PowerPoint presentation</strong> about <strong data-end=\"209\" data-start=\"193\">Beijing City</strong>.<br>\n\t<br>\n\t<strong data-end=\"231\" data-start=\"214\">Requirements:</strong></p>\n<ul>\n\t<li data-end=\"303\" data-start=\"234\">The <strong data-end=\"249\" data-start=\"240\">title</strong> must be in <strong data-end=\"300\" data-start=\"261\">both Chinese characters and English</strong>.</li>\n\t<li data-end=\"353\" data-start=\"304\">Each <strong data-end=\"325\" data-start=\"311\">slide/page</strong> must have a <strong data-end=\"350\" data-start=\"338\">subtitle</strong>.</li>\n\t<li data-end=\"875\" data-start=\"354\">The following topics must be covered:\n\t\t<ol>\n\t\t\t<li data-end=\"475\" data-start=\"398\"><strong data-end=\"424\" data-start=\"401\">Location of Beijing</strong> – Show Beijing’s position on a <strong data-end=\"472\" data-start=\"456\">map of China</strong>.</li>\n\t\t\t<li data-end=\"555\" data-start=\"478\"><strong data-end=\"507\" data-start=\"481\">Four Seasons &amp; Weather</strong> – Describe Beijing’s climate across the year.</li>\n\t\t\t<li data-end=\"686\" data-start=\"558\"><strong data-end=\"590\" data-start=\"561\">Local Tourist Attractions</strong> – Introduce <strong data-end=\"612\" data-start=\"603\">three</strong> attractions (one per slide), combining <strong data-end=\"677\" data-start=\"652\">historical and modern</strong> sites.</li>\n\t\t\t<li data-end=\"776\" data-start=\"689\"><strong data-end=\"706\" data-start=\"692\">Local Food</strong> – Present <strong data-end=\"724\" data-start=\"717\">one</strong> traditional dish per slide (<strong data-end=\"772\" data-start=\"753\">not restaurants</strong>).</li>\n\t\t\t<li data-end=\"875\" data-start=\"779\"><strong data-end=\"808\" data-start=\"782\">Useful Chinese Phrases</strong> – List key phrases travelers should learn before visiting China.</li>\n\t\t</ol></li>\n</ul><strong data-end=\"901\" data-start=\"877\">Presentation Format:</strong>\n<ul>\n\t<li data-end=\"960\" data-start=\"904\">Ensure clear <strong data-end=\"935\" data-start=\"919\">organisation</strong> and <strong data-end=\"957\" data-start=\"940\">visual appeal</strong>.</li>\n\t<li data-end=\"1021\" data-start=\"961\">Use <strong data-end=\"991\" data-start=\"967\">both text and images</strong> to support the information.</li>\n\t<li data-end=\"1071\" data-start=\"1022\">Keep the content <strong data-end=\"1068\" data-start=\"1041\">concise and informative</strong>.</li>\n</ul>\n<p><strong data-end=\"1086\" data-start=\"1073\">Deadline:</strong>&nbsp;<i>Friday, Week 6</i><br>\n\tStudents will be assessed on <strong data-end=\"1199\" data-start=\"1136\">content accuracy, presentation quality, and research effort</strong>.</p>"
+                        - r:
+                            - userfile: 245378
+                              filename: Year 8 Worksheet-Radicals.docx
+                              t: Year 8 Worksheet-Radicals.docx
+                              size: '13452'
+                              context_uuid: ea8ad405-8373-4595-9c38-954e08f71ce3
+                              i: 193579
+                              mimetype: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                              created_date: '2022-03-02 21:10:10.208546+10:30'
+                              uuid: ea8ad405-8373-4595-9c38-954e08f71ce3
+                              created_by: '42'
+                          t: 'Continue with the China CIty task '
+                          h: ''
+                          i: 509720
+                          l: ''
+                          'n': 1
+                          o: "<p><strong>Intention:&nbsp;</strong><br>\n\t<br>\n\tUnderstand as many radicals as possible.&nbsp;<br>\n\t<br>\n\tContinue with the China City Profile&nbsp;<br>\n\t<br>\n\t<strong>Lesson sequence:</strong>&nbsp;<br>\n\t<br>\n\t&nbsp;</p>\n<ul>\n\t<li data-end=\"157\" data-start=\"0\">Complete the attached worksheet on Radicals (Ms Wen will provide hard copies in class). Ensure you finish all sections and paste it into your notebook.</li>\n\t<li data-end=\"240\" data-is-last-node=\"\" data-start=\"159\">Continue working on your China City Project, which is due on Friday of Week 6.</li>\n</ul>"
+                      - - t: Conversation 2+ China City Profile
+                          i: 509684
+                          l: ''
+                          'n': 0
+                          o: "<strong>Intention:&nbsp;</strong><br>\n&nbsp;<br>\nMaster Conversation 1 and simple radicals<br>\n<br>\n<strong>Learning Sequence:&nbsp;</strong>\n<div>\n\t<br>\n\tClass checking for Numbers, Radicals, Greetings and Conversation 1.<br>\n\t<br>\n\tIntroduce Conversation 2:&nbsp;<br>\n\t<br>\n\t<strong>English &amp; Pinyin Conversation</strong><br>\n\t<strong>A:</strong> Hi! Ni hao<br>\n\t<strong>B:</strong> Hi! Ni hao<br>\n\t<br>\n\t<strong>A:</strong> How’s the weather today?<br>\n\t<strong>A:</strong> Jīntiān tiānqì zěnme yàng?<br>\n\t<br>\n\t<strong>B:</strong> Today is very nice.<br>\n\t<strong>B:</strong> Jīntiān tianqi hěn hǎo.<br>\n\t<br>\n\t<strong>A:</strong> Do you like soccer?<br>\n\t<strong>A:</strong> Nǐ xǐhuān zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like playing soccer.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān tī zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like AFL?<br>\n\t<strong>A:</strong> Nǐ xǐhuān Àodàlìyǎ zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like watching football.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān kàn Àodàlìyǎ zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like running?<br>\n\t<strong>A:</strong> Nǐ xǐhuān pǎobù ma?<br>\n\t<br>\n\t<strong>B:</strong> No, running is too boring.<br>\n\t<strong>B:</strong>&nbsp;Bù , pǎobù tài wúliáo le.<br>\n\t<br>\n\t<strong>A:</strong> What sports do you like?<br>\n\t<strong>A:</strong> Nǐ xǐhuān shénme yùndòng?<br>\n\t<br>\n\t<strong>B:</strong> I like swimming.<br>\n\t<strong>B:</strong> Wǒ xǐhuān yóuyǒng.<br>\n\t<br>\n\tKeep working on the City PPT which is due this Friday.&nbsp;<br>\n\t<br>\n\txiexie!&nbsp;\n</div>"
+                        - t: China City Profile Due
+                          h: ''
+                          i: 509703
+                          l: ''
+                          'n': 1
+                          o: "<p><strong>Intention:&nbsp;</strong><br>\n\t&nbsp;<br>\n\tMaster Conversation 1 and simple radicals<br>\n\t<br>\n\t<strong>Learning Sequence:&nbsp;</strong></p>\n<div>\n\t<br>\n\tClass checking for Numbers, Radicals, Greetings and Conversation 1.<br>\n\t<br>\n\tIntroduce Conversation 2:&nbsp;<br>\n\t<br>\n\t<strong>English &amp; Pinyin Conversation</strong><br>\n\t<strong>A:</strong> Hi! Ni hao<br>\n\t<strong>B:</strong> Hi! Ni hao<br>\n\t<br>\n\t<strong>A:</strong> How’s the weather today?<br>\n\t<strong>A:</strong> Jīntiān tiānqì zěnme yàng?<br>\n\t<br>\n\t<strong>B:</strong> Today is very nice.<br>\n\t<strong>B:</strong> Jīntiān tianqi hěn hǎo.<br>\n\t<br>\n\t<strong>A:</strong> Do you like soccer?<br>\n\t<strong>A:</strong> Nǐ xǐhuān zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like playing soccer.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān tī zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like AFL?<br>\n\t<strong>A:</strong> Nǐ xǐhuān Àodàlìyǎ zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like watching football.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān kàn Àodàlìyǎ zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like running?<br>\n\t<strong>A:</strong> Nǐ xǐhuān pǎobù ma?<br>\n\t<br>\n\t<strong>B:</strong> No, running is too boring.<br>\n\t<strong>B:</strong>&nbsp;Bù , pǎobù tài wúliáo le.<br>\n\t<br>\n\t<strong>A:</strong> What sports do you like?<br>\n\t<strong>A:</strong> Nǐ xǐhuān shénme yùndòng?<br>\n\t<br>\n\t<strong>B:</strong> I like swimming.<br>\n\t<strong>B:</strong> Wǒ xǐhuān yóuyǒng.<br>\n\t<br>\n\tKeep working on the City PPT which is due this Friday.&nbsp;<br>\n\t<br>\n\txiexie!&nbsp;\n</div>\n<p dir=\"ltr\"></p>"
+                      - - r:
+                            - userfile: 648960
+                              filename: Year 8 Speaking Test- Vocabulary.docx
+                              t: Year 8 Speaking Test- Vocabulary.docx
+                              size: '28043'
+                              context_uuid: 2d481fed-ad00-4bc9-ac86-c4fada173261
+                              i: 221315
+                              mimetype: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                              created_date: '2025-03-11 09:43:14.26301+10:30'
+                              uuid: 2d481fed-ad00-4bc9-ac86-c4fada173261
+                              created_by: '42'
+                          t: Work on Conversation 2 and simple radicals
+                          i: 509685
+                          l: ''
+                          'n': 0
+                          o: "<p><strong>Intention:&nbsp;</strong><br>\n\t&nbsp;<br>\n\tMaster Conversation 1 &amp; 2 and simple radicals<br>\n\t<br>\n\t<strong>Learning Sequence:&nbsp;</strong></p>\n<div>\n\t<br>\n\tClass checking for Numbers, Radicals, Greetings and Conversation 1.<br>\n\t<br>\n\tIntroduce Conversation 2:&nbsp;<br>\n\t<br>\n\t<strong>English &amp; Pinyin Conversation</strong><br>\n\t<strong>A:</strong> Hi! Ni hao<br>\n\t<strong>B:</strong> Hi! Ni hao<br>\n\t<br>\n\t<strong>A:</strong> How’s the weather today?<br>\n\t<strong>A:</strong> Jīntiān tiānqì zěnme yàng?<br>\n\t<br>\n\t<strong>B:</strong> Today is very nice.<br>\n\t<strong>B:</strong> Jīntiān tianqi hěn hǎo.<br>\n\t<br>\n\t<strong>A:</strong> Do you like soccer?<br>\n\t<strong>A:</strong> Nǐ xǐhuān zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like playing soccer.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān tī zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like AFL?<br>\n\t<strong>A:</strong> Nǐ xǐhuān Àodàlìyǎ zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like watching football.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān kàn Àodàlìyǎ zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like running?<br>\n\t<strong>A:</strong> Nǐ xǐhuān pǎobù ma?<br>\n\t<br>\n\t<strong>B:</strong> No, running is too boring.<br>\n\t<strong>B:</strong>&nbsp;Bù , pǎobù tài wúliáo le.<br>\n\t<br>\n\t<strong>A:</strong> What sports do you like?<br>\n\t<strong>A:</strong> Nǐ xǐhuān shénme yùndòng?<br>\n\t<br>\n\t<strong>B:</strong> I like swimming.<br>\n\t<strong>B:</strong> Wǒ xǐhuān yóuyǒng.\n</div>"
+                        - t: Final preparation for the oral test in Week 8
+                          h: ''
+                          i: 509704
+                          l: ''
+                          'n': 1
+                          o: "<p><strong>Intention:&nbsp;</strong><br>\n\t&nbsp;<br>\n\tMaster Conversation 1 &amp; 2 and simple radicals<br>\n\t<br>\n\t<strong>Learning Sequence:&nbsp;</strong></p>\n<div>\n\t<br>\n\tClass checking for Numbers, Radicals, Greetings and Conversation 1.<br>\n\t<br>\n\tIntroduce Conversation 2:&nbsp;<br>\n\t<br>\n\t<strong>English &amp; Pinyin Conversation</strong><br>\n\t<strong>A:</strong> Hi! Ni hao<br>\n\t<strong>B:</strong> Hi! Ni hao<br>\n\t<br>\n\t<strong>A:</strong> How’s the weather today?<br>\n\t<strong>A:</strong> Jīntiān tiānqì zěnme yàng?<br>\n\t<br>\n\t<strong>B:</strong> Today is very nice.<br>\n\t<strong>B:</strong> Jīntiān tianqi hěn hǎo.<br>\n\t<br>\n\t<strong>A:</strong> Do you like soccer?<br>\n\t<strong>A:</strong> Nǐ xǐhuān zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like playing soccer.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān tī zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like AFL?<br>\n\t<strong>A:</strong> Nǐ xǐhuān Àodàlìyǎ zúqiú ma?<br>\n\t<br>\n\t<strong>B:</strong> Yes, I like watching football.<br>\n\t<strong>B:</strong> Shì de, wǒ xǐhuān kàn Àodàlìyǎ zúqiú.<br>\n\t<br>\n\t<strong>A:</strong> Do you like running?<br>\n\t<strong>A:</strong> Nǐ xǐhuān pǎobù ma?<br>\n\t<br>\n\t<strong>B:</strong> No, running is too boring.<br>\n\t<strong>B:</strong>&nbsp;Bù , pǎobù tài wúliáo le.<br>\n\t<br>\n\t<strong>A:</strong> What sports do you like?<br>\n\t<strong>A:</strong> Nǐ xǐhuān shénme yùndòng?<br>\n\t<br>\n\t<strong>B:</strong> I like swimming.<br>\n\t<strong>B:</strong> Wǒ xǐhuān yóuyǒng.\n</div>"
+                      - - t: Speaking test in Chinese
+                          i: 509686
+                          l: ''
+                          'n': 0
+                          o: |-
+                            Monday Chinese class:&nbsp;<br>
+                            <br>
+                            YOu will still have the lesson to work on your Conversation 1 and 2 plus the worksheet.&nbsp;<br>
+                            <br>
+                            If you are ready, we can have the test in class today.&nbsp;
+                        - t: Finalise the speaking test in class
+                          h: ''
+                          i: 509706
+                          l: ''
+                          'n': 1
+                          o: "The<strong> objective </strong>of the unit is to assess students' ability to:\n<ol>\n\t<li>Ask about prices and give responses in Chinese.</li>\n\t<li>Identify common products in a Chinese grocery store.</li>\n\t<li>Greet people in Chinese.</li>\n\t<li>Apply language skills in a real-world context by shopping in an Asian grocery store in Chinatown and documenting their experience.</li>\n</ol><strong>Lesson Sequence:&nbsp;</strong><br>\n<br>\n1. Revision for characters and numbers<br>\n<br>\n2. Revision for Money in Chinese<br>\n<br>\n3. Introduce how to ask price in Chinese<br>\n<br>\n&nbsp;<br>\n&nbsp; &nbsp;一共多少钱？一共20块。<br>\n<br>\n4. In pairs or individually,&nbsp; provide a list of items you are going to buy in the Chinese grocery.&nbsp;<br>\n&nbsp; &nbsp;In the list, you should have:&nbsp;\n<ul>\n\t<li>Name of the item,&nbsp;</li>\n\t<li>Brand of the item ( a few brands)&nbsp;</li>\n\t<li>Size (one size, big, small)&nbsp;</li>\n\t<li>Color of the package</li>\n\t<li>Price&nbsp;</li>\n</ul><br>\n&nbsp;"
+                      - - t: Grocery shopping in Chinatown
+                          i: 509687
+                          l: ''
+                          'n': 0
+                          o: "<p><br>\n\tThe<strong> objective </strong>of the unit is to assess students' ability to:</p>\n<ol>\n\t<li>Ask about prices and give responses in Chinese.</li>\n\t<li>Identify common products in a Chinese grocery store.</li>\n\t<li>Greet people in Chinese.</li>\n\t<li>Apply language skills in a real-world context by shopping in an Asian grocery store in Chinatown and documenting their experience.</li>\n</ol><strong>Lesson Sequence:&nbsp;</strong><br>\n<br>\n1.&nbsp; Introduce how to ask price in Chinese<br>\n&nbsp; &nbsp; Copy Chinese characters, pinyin and English in your notebook.&nbsp;<br>\n&nbsp;<br>\n&nbsp;<a href=\"https://quizlet.com/au/913010243/grocery-shopping-in-chinese-flash-cards/?i=2rnyax&amp;x=1jqt\" target=\"_blank\">Shopping in Chinese</a><br>\n<br>\n<br>\n<br>\n2. In pairs or individually,&nbsp; provide a list of items you are going to buy in the <strong>Chinese grocery</strong>.&nbsp;<br>\n&nbsp; &nbsp;In the list, you should have:&nbsp;\n<ul>\n\t<li>Name of the item,&nbsp;</li>\n\t<li>Brand of the item ( a few brands)&nbsp;</li>\n\t<li>Size (one size, big, small)&nbsp;</li>\n\t<li>Color of the package</li>\n\t<li>Price&nbsp;</li>\n</ul>\n<p>Create a PPT with pictures for all. 5 items for each person.&nbsp;<br>\n\t<br>\n\t<br>\n\t&nbsp;</p>\n<table>\n\t<tbody>\n\t\t<tr>\n\t\t\t<td>\n\t\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>"
+                        - t: 'PPT Presentation: My Shopping list in Chinatown'
+                          h: ''
+                          i: 509707
+                          l: ''
+                          'n': 1
+                          o: "<p>Work on preparing a PPT about your shopping list.&nbsp;<br>\n\t<br>\n\tYou will need to present this to the class:&nbsp;</p>\n<ul>\n\t<li>What did you choose? how do you say them in Chinese? pictures&nbsp;</li>\n\t<li>Why did you choose to buy them?&nbsp;</li>\n\t<li>How much is it? How do you buy it ( a bottle, a kilo? )&nbsp;</li>\n\t<li>How much are you going to bring to our excursion?&nbsp;<br>\n\t\t<br>\n\t\t&nbsp;</li>\n</ul>\n<p><br>\n\t<br>\n\t&nbsp;</p>"
+                      - - t: 'Continue with my grocery shopping list '
+                          i: 509688
+                          l: ''
+                          'n': 0
+                          o: "<p>Work on preparing a PPT about your shopping list.&nbsp;<br>\n\t<br>\n\tYou will need to present this to the class:&nbsp;</p>\n<ul>\n\t<li>What did you choose? how do you say them in Chinese? pictures&nbsp;</li>\n\t<li>Why did you choose to buy them?&nbsp;</li>\n\t<li>How much is it? How do you buy it ( a bottle, a kilo? )&nbsp;</li>\n\t<li>How much are you going to bring to our excursion?&nbsp;</li>\n</ul>Continue with your presentation preparation.&nbsp;<br>\n<br>\nStart to write your script for Chinatown excursion:&nbsp;<br>\n&nbsp;\n<h4 data-end=\"130\" data-start=\"105\"><strong data-end=\"128\" data-start=\"110\">Task Overview:</strong></h4>Imagine you are visiting a grocery store in Chinatown. You will write a script introducing your experience and video record it.\n<h4 data-end=\"290\" data-start=\"266\"><strong data-end=\"288\" data-start=\"271\">Requirements:</strong></h4>In your presentation, you must:\n<ol>\n\t<li data-end=\"506\" data-start=\"326\"><strong data-end=\"345\" data-start=\"329\">Introduction</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"381\" data-start=\"351\">Introduce yourself (name).</li>\n\t\t\t<li data-end=\"404\" data-start=\"385\">State the date.</li>\n\t\t\t<li data-end=\"433\" data-start=\"408\">Describe the weather.</li>\n\t\t\t<li data-end=\"506\" data-start=\"437\">Say where you are (e.g., “I am at a grocery store in Chinatown”).</li>\n\t\t</ul></li>\n\t<li data-end=\"867\" data-start=\"508\"><strong data-end=\"540\" data-start=\"511\">Introducing Grocery Items</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"596\" data-start=\"546\">Choose <strong>five</strong>&nbsp;different items in the store.</li>\n\t\t\t<li data-end=\"867\" data-start=\"600\">For each item, answer the following:\n\t\t\t\t<ul>\n\t\t\t\t\t<li data-end=\"689\" data-start=\"646\">What is this? (Say the name in Chinese)</li>\n\t\t\t\t\t<li data-end=\"721\" data-start=\"695\">How much does it cost?</li>\n\t\t\t\t\t<li data-end=\"800\" data-start=\"727\">How does it taste? (Use adjectives such as tasty, sweet, spicy, etc.)</li>\n\t\t\t\t</ul></li>\n\t\t</ul></li>\n\t<li data-end=\"953\" data-start=\"869\"><strong data-end=\"883\" data-start=\"872\">Closing</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"953\" data-start=\"889\">Say goodbye to your audience in a friendly and creative way.</li>\n\t\t</ul></li>\n</ol>\n<h4 data-end=\"986\" data-start=\"955\"><strong data-end=\"984\" data-start=\"960\">Assessment Criteria:</strong></h4>Your task will be graded based on:<br data-end=\"1024\" data-start=\"1021\">\n✅ <strong data-end=\"1038\" data-start=\"1026\">Accuracy</strong> – Correct use of Chinese vocabulary and grammar.<br data-end=\"1090\" data-start=\"1087\">\n✅ <strong data-end=\"1119\" data-start=\"1092\">Fluency &amp; Pronunciation</strong> – Clear and confident speaking.<br data-end=\"1154\" data-start=\"1151\">\n✅ <strong data-end=\"1170\" data-start=\"1156\">Creativity</strong> – Engaging and interesting presentation.<br data-end=\"1214\" data-start=\"1211\">\n✅ <strong data-end=\"1232\" data-start=\"1216\">Completeness</strong> – All required parts included.<br>\n<strong data-end=\"1275\" data-start=\"1267\">Tip:</strong> Be expressive, add gestures, and make your presentation engaging to earn higher m<br>\n&nbsp;"
+                        - t: 'Write the script in Chinese for Grocery Shopping '
+                          h: ''
+                          i: 509708
+                          l: ''
+                          'n': 1
+                          o: "<p>Continue with your presentation preparation.&nbsp;<br>\n\t<br>\n\tMs Wen is going into introduce a few questions in Chinese.&nbsp;<br>\n\t<br>\n\tWhat is this? =This is what 这是什么？&nbsp;<br>\n\t<br>\n\twhat is that? that is what 那是什么？&nbsp;<br>\n\t<br>\n\t<br>\n\twhere is La Tiao? = La tiao is（at)&nbsp; where? 辣条在哪儿?<br>\n\t<br>\n\t<br>\n\tStart to write your script for shopping in Chinatown<br>\n\t<br>\n\t&nbsp;</p>\n<h4 data-end=\"130\" data-start=\"105\"><strong data-end=\"128\" data-start=\"110\">Task Overview:</strong></h4>Imagine you are visiting a grocery store in Chinatown. You will write a script introducing your experience and video record it.\n<h4 data-end=\"290\" data-start=\"266\"><strong data-end=\"288\" data-start=\"271\">Requirements:</strong></h4>In your presentation, you must:\n<ol>\n\t<li data-end=\"506\" data-start=\"326\"><strong data-end=\"345\" data-start=\"329\">Introduction</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"381\" data-start=\"351\">Introduce yourself (name).</li>\n\t\t\t<li data-end=\"404\" data-start=\"385\">State the date.</li>\n\t\t\t<li data-end=\"433\" data-start=\"408\">Describe the weather.</li>\n\t\t\t<li data-end=\"506\" data-start=\"437\">Say where you are (e.g., “I am at a grocery store in Chinatown”).</li>\n\t\t</ul></li>\n\t<li data-end=\"867\" data-start=\"508\"><strong data-end=\"540\" data-start=\"511\">Introducing Grocery Items</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"596\" data-start=\"546\">Choose <strong>five</strong>&nbsp;different items in the store.</li>\n\t\t\t<li data-end=\"867\" data-start=\"600\">For each item, answer the following:\n\t\t\t\t<ul>\n\t\t\t\t\t<li data-end=\"689\" data-start=\"646\">What is this? (Say the name in Chinese)</li>\n\t\t\t\t\t<li data-end=\"721\" data-start=\"695\">How much does it cost?</li>\n\t\t\t\t\t<li data-end=\"800\" data-start=\"727\">How does it taste? (Use adjectives such as tasty, sweet, spicy, etc.)</li>\n\t\t\t\t</ul></li>\n\t\t</ul></li>\n\t<li data-end=\"953\" data-start=\"869\"><strong data-end=\"883\" data-start=\"872\">Closing</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"953\" data-start=\"889\">Say goodbye to your audience in a friendly and creative way.</li>\n\t\t</ul></li>\n</ol>\n<h4 data-end=\"986\" data-start=\"955\"><strong data-end=\"984\" data-start=\"960\">Assessment Criteria:</strong></h4>\n<p>Your task will be graded based on:<br data-end=\"1024\" data-start=\"1021\">\n\t✅ <strong data-end=\"1038\" data-start=\"1026\">Accuracy</strong> – Correct use of Chinese vocabulary and grammar.<br data-end=\"1090\" data-start=\"1087\">\n\t✅ <strong data-end=\"1119\" data-start=\"1092\">Fluency &amp; Pronunciation</strong> – Clear and confident speaking.<br data-end=\"1154\" data-start=\"1151\">\n\t✅ <strong data-end=\"1170\" data-start=\"1156\">Creativity</strong> – Engaging and interesting presentation.<br data-end=\"1214\" data-start=\"1211\">\n\t✅ <strong data-end=\"1232\" data-start=\"1216\">Completeness</strong> – All required parts included.<br>\n\t<strong data-end=\"1275\" data-start=\"1267\">Tip:</strong> Be expressive, add gestures, and make your presentation engaging to earn higher marks.&nbsp;</p>"
+                      - - r:
+                            - userfile: 266793
+                              filename: Year 8 china country profile.doc
+                              t: Year 8 china country profile.doc
+                              size: '217600'
+                              context_uuid: 9e837901-548c-4c8e-885c-517a1e4b2398
+                              i: 193582
+                              mimetype: application/msword
+                              created_date: '2022-04-12 17:58:53.071293+09:30'
+                              uuid: 9e837901-548c-4c8e-885c-517a1e4b2398
+                              created_by: '42'
+                          t: Assessment-Shopping in Chinatown
+                          i: 509689
+                          l: ''
+                          'n': 0
+                          o: "<h4 data-end=\"130\" data-start=\"105\"><strong data-end=\"128\" data-start=\"110\">Task Overview:</strong></h4>Imagine you are visiting a grocery store in Chinatown. You will write a script introducing your experience and video record it.\n<h4 data-end=\"290\" data-start=\"266\"><strong data-end=\"288\" data-start=\"271\">Requirements:</strong></h4>In your presentation, you must:\n<ol>\n\t<li data-end=\"506\" data-start=\"326\"><strong data-end=\"345\" data-start=\"329\">Introduction</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"381\" data-start=\"351\">Introduce yourself (name).</li>\n\t\t\t<li data-end=\"404\" data-start=\"385\">State the date.</li>\n\t\t\t<li data-end=\"433\" data-start=\"408\">Describe the weather.</li>\n\t\t\t<li data-end=\"506\" data-start=\"437\">Say where you are (e.g., “I am at a grocery store in Chinatown”).</li>\n\t\t</ul></li>\n\t<li data-end=\"867\" data-start=\"508\"><strong data-end=\"540\" data-start=\"511\">Introducing Grocery Items</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"596\" data-start=\"546\">Choose <b>five</b>&nbsp;different items in the store.</li>\n\t\t\t<li data-end=\"867\" data-start=\"600\">For each item, answer the following:\n\t\t\t\t<ul>\n\t\t\t\t\t<li data-end=\"689\" data-start=\"646\">What is this? (Say the name in Chinese)</li>\n\t\t\t\t\t<li data-end=\"721\" data-start=\"695\">How much does it cost?</li>\n\t\t\t\t\t<li data-end=\"800\" data-start=\"727\">How does it taste? (Use adjectives such as tasty, sweet, spicy, etc.)</li>\n\t\t\t\t</ul></li>\n\t\t</ul></li>\n\t<li data-end=\"953\" data-start=\"869\"><strong data-end=\"883\" data-start=\"872\">Closing</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"953\" data-start=\"889\">Say goodbye to your audience in a friendly and creative way.</li>\n\t\t</ul></li>\n</ol>\n<h4 data-end=\"986\" data-start=\"955\"><strong data-end=\"984\" data-start=\"960\">Assessment Criteria:</strong></h4>\n<p>Your task will be graded based on:<br data-end=\"1024\" data-start=\"1021\">\n\t✅ <strong data-end=\"1038\" data-start=\"1026\">Accuracy</strong> – Correct use of Chinese vocabulary and grammar.<br data-end=\"1090\" data-start=\"1087\">\n\t✅ <strong data-end=\"1119\" data-start=\"1092\">Fluency &amp; Pronunciation</strong> – Clear and confident speaking.<br data-end=\"1154\" data-start=\"1151\">\n\t✅ <strong data-end=\"1170\" data-start=\"1156\">Creativity</strong> – Engaging and interesting presentation.<br data-end=\"1214\" data-start=\"1211\">\n\t✅ <strong data-end=\"1232\" data-start=\"1216\">Completeness</strong> – All required parts included.<br>\n\t<strong data-end=\"1275\" data-start=\"1267\">Tip:</strong> Be expressive, add gestures, and make your presentation engaging to earn higher marks!</p>"
+                        - t: COntinue with the script writing
+                          h: ''
+                          i: 509709
+                          l: ''
+                          'n': 1
+                          o: "<h4 data-end=\"130\" data-start=\"105\"><strong data-end=\"128\" data-start=\"110\">Task Overview:</strong></h4>Imagine you are visiting a grocery store in Chinatown. You will write a script introducing your experience and video record it.\n<h4 data-end=\"290\" data-start=\"266\"><strong data-end=\"288\" data-start=\"271\">Requirements:</strong></h4>In your presentation, you must:\n<ol>\n\t<li data-end=\"506\" data-start=\"326\"><strong data-end=\"345\" data-start=\"329\">Introduction</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"381\" data-start=\"351\">Introduce yourself (name).</li>\n\t\t\t<li data-end=\"404\" data-start=\"385\">State the date.</li>\n\t\t\t<li data-end=\"433\" data-start=\"408\">Describe the weather.</li>\n\t\t\t<li data-end=\"506\" data-start=\"437\">Say where you are (e.g., “I am at a grocery store in Chinatown”).</li>\n\t\t</ul></li>\n\t<li data-end=\"867\" data-start=\"508\"><strong data-end=\"540\" data-start=\"511\">Introducing Grocery Items</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"596\" data-start=\"546\">Choose <b>five</b>&nbsp;different items in the store.</li>\n\t\t\t<li data-end=\"867\" data-start=\"600\">For each item, answer the following:\n\t\t\t\t<ul>\n\t\t\t\t\t<li data-end=\"689\" data-start=\"646\">What is this? (Say the name in Chinese)</li>\n\t\t\t\t\t<li data-end=\"721\" data-start=\"695\">How much does it cost?</li>\n\t\t\t\t\t<li data-end=\"800\" data-start=\"727\">How does it taste? (Use adjectives such as tasty, sweet, spicy, etc.)</li>\n\t\t\t\t</ul></li>\n\t\t</ul></li>\n\t<li data-end=\"953\" data-start=\"869\"><strong data-end=\"883\" data-start=\"872\">Closing</strong>\n\t\t<ul>\n\t\t\t<li data-end=\"953\" data-start=\"889\">Say goodbye to your audience in a friendly and creative way.</li>\n\t\t</ul></li>\n</ol>\n<h4 data-end=\"986\" data-start=\"955\"><strong data-end=\"984\" data-start=\"960\">Assessment Criteria:</strong></h4>\n<p>Your task will be graded based on:<br data-end=\"1024\" data-start=\"1021\">\n\t✅ <strong data-end=\"1038\" data-start=\"1026\">Accuracy</strong> – Correct use of Chinese vocabulary and grammar.<br data-end=\"1090\" data-start=\"1087\">\n\t✅ <strong data-end=\"1119\" data-start=\"1092\">Fluency &amp; Pronunciation</strong> – Clear and confident speaking.<br data-end=\"1154\" data-start=\"1151\">\n\t✅ <strong data-end=\"1170\" data-start=\"1156\">Creativity</strong> – Engaging and interesting presentation.<br data-end=\"1214\" data-start=\"1211\">\n\t✅ <strong data-end=\"1232\" data-start=\"1216\">Completeness</strong> – All required parts included.<br>\n\t<strong data-end=\"1275\" data-start=\"1267\">Tip:</strong> Be expressive, add gestures, and make your presentation engaging to earn higher marks!</p>"
+                        - t: ''
+                          h: ''
+                          i: 588636
+                          l: ''
+                          'n': 2
+                          o: ''
+                      - - t: Continue with the shopping list
+                          i: 509690
+                          l: ''
+                          'n': 0
+                          o: |-
+                            Revision: Keywords for Shoppling in an Asian Grocery<br>
+                            <br>
+                            Topics: Money-Asking price, introducing an item, Adjectives<br>
+                            <br>
+                            Let Ms Wen check your script&nbsp;<br>
+                            <br>
+                            Proposed excursion time:&nbsp;<br>
+                            <br>
+                            Year 8 Chinese A: Week 2 Wednesday 10:00 am-12:45 pm<br>
+                            <br>
+                            Year 8 Chinese B: Week 2, Thursday 11:45 pm-2:05pm
+                        - r:
+                            - userfile: 667809
+                              filename: Year 8 china country profile.doc
+                              t: Year 8 china country profile.doc
+                              size: '218112'
+                              context_uuid: e86d056d-9bca-473c-ac53-c7fbd12b87c3
+                              i: 223583
+                              mimetype: application/msword
+                              created_date: '2025-04-30 09:14:29.819082+09:30'
+                              uuid: e86d056d-9bca-473c-ac53-c7fbd12b87c3
+                              created_by: '42'
+                          t: Grocery shopping continues
+                          h: ''
+                          i: 509710
+                          l: ''
+                          'n': 1
+                          o: "<p>Complete the attached worksheet on a Word document. Due at the end of Week 2.&nbsp;<br>\n\tWork on the new conversation:&nbsp;<br>\n\t<br>\n\tIntroduce the new words:&nbsp;<br>\n\t<br>\n\t在： at/in/on<br>\n\tShop: Shang dian<br>\n\ttogether: yi gong 一共<br>\n\t太贵了： Too expensive, Tai gui le<br>\n\t<br>\n\tConversation:&nbsp;<br>\n\t<br>\n\tA: Wǒ zài _________shang diàn.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì shuǐ.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì bīng chá.<br>\n\tB: Nà shì shénme?<br>\n\tA: Nà shì fangbian miàn.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai wǔ mao<br>\n\tB: Nà ge duōshǎo qián?<br>\n\tA: Nà ge shí'èr kuai.<br>\n\tB: Yigòng duōshǎo qián?<br>\n\tA: Yi gong&nbsp; èr shí'èr kuai wǔ máo.<br>\n\tB: Tài guì le!<br>\n\t&nbsp;</p>"
+                      - - r:
+                            - userfile: 669950
+                              filename: Year 8 china country profile.doc
+                              t: Year 8 china country profile.doc
+                              size: '218112'
+                              context_uuid: e09e9569-61a0-4040-8057-db0bfe7502ee
+                              i: 223907
+                              mimetype: application/msword
+                              created_date: '2025-05-06 06:59:47.086097+09:30'
+                              uuid: e09e9569-61a0-4040-8057-db0bfe7502ee
+                              created_by: '42'
+                          t: Grocery Shopping
+                          i: 509691
+                          l: ''
+                          'n': 0
+                          o: "<p>Complete the China Country Profile from Week 1. Due date: Week 4<br>\n\t<br>\n\t<br>\n\tKeep going with the speaking practice. Base on the conversation, write your own script for the video recording. Mr Garreffa will accompany the class on go excursion on Wednesday, Week 4 （ Unofortunately, I am not at school on Wed, Week 3)<br>\n\t<br>\n\tConversation:&nbsp;<br>\n\t<br>\n\tA: Wǒ zài _________shang diàn.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì shuǐ.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì bīng chá.<br>\n\tB: Nà shì shénme?<br>\n\tA: Nà shì fangbian miàn.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai wǔ mao<br>\n\tB: Nà ge duōshǎo qián?<br>\n\tA: Nà ge shí'èr kuai.<br>\n\tB: Yigòng duōshǎo qián?<br>\n\tA: Yi gong&nbsp; èr shí'èr kuai wǔ máo.<br>\n\tB: Tài guì le!<br>\n\t<br>\n\t<br>\n\t<br>\n\tIt would be best if you also worked on&nbsp;<a href=\"https://quizlet.com/au/913010243/grocery-shopping-in-chinese-flash-cards/?i=2rnyax&amp;x=1qqt\" target=\"_blank\">Grocery shopping in Chinese</a><br>\n\t<br>\n\tYou should have the majority of the words in your notebook, write down any missed ones. You can play Match game or try a Test. You must login to see the full vocabulary list.&nbsp;</p>"
+                        - t: Grocery Shopping&Typing in Chinese
+                          h: ''
+                          i: 509711
+                          l: ''
+                          'n': 1
+                          o: "<p><a href=\"https://www.youtube.com/watch?v=PRVnRYoQlXk\" target=\"_blank\">How to use Pinyin to type</a><br>\n\t<br>\n\t<br>\n\t<a href=\"https://www.youtube.com/watch?v=5Ip4VjlD7Ew&amp;t=166s\" target=\"_blank\">Learn how to type characters on a keyboard</a></p>\n<p><br>\n\t<br>\n\tKeep going with the speaking practice. Base on the conversation, write your own script for the video recording. Mr Garreffa will accompany the class on go excursion on Wednesday, Week 4 （ Unofortunately, I am not at school on Wed, Week 3)<br>\n\t<br>\n\tConversation:&nbsp;<br>\n\t<br>\n\tA: Wǒ zài _________shang diàn.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì shuǐ.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì bīng chá.<br>\n\tB: Nà shì shénme?<br>\n\tA: Nà shì fangbian miàn.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai wǔ mao<br>\n\tB: Nà ge duōshǎo qián?<br>\n\tA: Nà ge shí'èr kuai.<br>\n\tB: Yigòng duōshǎo qián?<br>\n\tA: Yi gong&nbsp; èr shí'èr kuai wǔ máo.<br>\n\tB: Tài guì le!<br>\n\t<br>\n\t<br>\n\t<br>\n\tIt would be best if you also worked on&nbsp;<a href=\"https://quizlet.com/au/913010243/grocery-shopping-in-chinese-flash-cards/?i=2rnyax&amp;x=1qqt\" target=\"_blank\">Grocery shopping in Chinese</a><br>\n\t<br>\n\tYou should have the majority of the words in your notebook, write down any missed ones. You can play Match game or try a Test. You must login to see the full vocabulary list.&nbsp;</p>"
+                      - - r:
+                            - userfile: 274764
+                              filename: Year 8 typing-self introduction.docx
+                              t: Year 8 typing-self introduction.docx
+                              size: '35098'
+                              context_uuid: fd85bb40-694e-4c84-b39b-0d073d555c8f
+                              i: 193576
+                              mimetype: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                              created_date: '2022-05-15 20:18:29.176778+09:30'
+                              uuid: fd85bb40-694e-4c84-b39b-0d073d555c8f
+                              created_by: '42'
+                          t: Working on editing video and China Country Profile
+                          i: 509692
+                          l: ''
+                          'n': 0
+                          o: "<p>Two major focuses:&nbsp;<br>\n\t<br>\n\t1. Completing Video editing about Shopping in Chinese Groceries.&nbsp;<br>\n\t<br>\n\t2. Completing the China Country Profile. Submit as a PDF file!<br>\n\t<br>\n\t<br>\n\tBoth assessments are due in Week 4.&nbsp;<br>\n\t<br>\n\tPlease upload your work&nbsp; via SQETA&nbsp; Assessement</p>"
+                        - t: 'Typing Chinese '
+                          h: ''
+                          i: 509712
+                          l: ''
+                          'n': 1
+                          o: "<p><a href=\"https://www.youtube.com/watch?v=PRVnRYoQlXk\" target=\"_blank\">How to use Pinyin to type</a><br>\n\t<br>\n\t<br>\n\t<a href=\"https://www.youtube.com/watch?v=5Ip4VjlD7Ew&amp;t=166s\" target=\"_blank\">Learn how to type characters on a keyboard</a><br>\n\t<br>\n\t<br>\n\t<br>\n\tConversation:&nbsp;<br>\n\t<br>\n\tA: Wǒ zài _________shang diàn.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì shuǐ.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì bīng chá.<br>\n\tB: Nà shì shénme?<br>\n\tA: Nà shì fangbian miàn.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai wǔ mao<br>\n\tB: Yigòng duōshǎo qián?<br>\n\tA: Yi gong&nbsp; èr shí'èr kuai wǔ máo.<br>\n\tB: Tài guì le!<br>\n\t<br>\n\t<br>\n\t<br>\n\tIt would be best if you also worked on&nbsp;<a href=\"https://quizlet.com/au/913010243/grocery-shopping-in-chinese-flash-cards/?i=2rnyax&amp;x=1qqt\" target=\"_blank\">Grocery shopping in Chinese</a><br>\n\t<br>\n\t<br>\n\t&nbsp;</p>"
+                  status: '200'
+                  
+  /seqta/student/load/syllabus:
+    post:
+      tags:
+        - Courses
+      summary: View the syllabus of a subject
+      description: Returns a syllasbus. 
+      operationId: courses_syallabus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                programme: '4137'
+                metaclass: '8110'
+              
+                
+        required: true    
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    a: Languages
+                    s: Australian Curriculum
+                    c: '[ACLCHU] Understanding'
+                    d: Understanding
+                    i: 1650
+                    'n': Chinese
+                  status: '200'
+                  
+  # DASHBOARD
+  /seqta/student/dashboard:
+    post:
+      tags:
+        - Dashboard
+      summary: View the dashboard layout!
+      description: Returns all of the enabled dashboard buttons
+      operationId: dashboard
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    available:
+                      - ident: motd
+                        id: 4
+                      - ident: notes
+                        id: 5
+                      - ident: sentence
+                        id: 8
+                      - ident: tasks
+                        id: 12
+                      - ident: summary-absence
+                        id: 9
+                        config: '{ "age": "" }'
+                      - ident: summary-homework
+                        id: 10
+                        config: '{ }'
+                      - ident: summary-pastoral
+                        id: 11
+                        config: '{ }'
+                      - ident: timetable
+                        id: 13
+                        config: '{}'
+                      - ident: pastoral
+                        id: 16
+                        config: '{"perStudent": true, "message":""}'
+                    used:
+                      - ident: timetable
+                        id: 13
+                        params: ''
+                        config: '{}'
+                        order: 0
+                      - ident: summary-homework
+                        id: 10
+                        params: ''
+                        config: '{ }'
+                        order: 1
+                      - ident: notes
+                        id: 5
+                        params: ''
+                        order: 2
+                      - ident: tasks
+                        id: 12
+                        params: '{"completed":"show"}'
+                        order: 3
+                      - ident: sentence
+                        id: 8
+                        params: ''
+                        order: 4
+                      - ident: motd
+                        id: 4
+                        params: ''
+                        order: 5
+                      - ident: summary-absence
+                        id: 9
+                        params: ''
+                        config: '{ "age": "" }'
+                        order: 6
+                      - ident: pastoral
+                        id: 16
+                        params: ''
+                        config: '{"perStudent": true, "message":""}'
+                        order: 7
+                      - ident: summary-pastoral
+                        id: 11
+                        params: ''
+                        config: '{ }'
+                        order: 8
+                  status: '200'
+  /seqta/student/dashlet/timetable:                
+    post:
+      tags:
+        - Dashboard
+      summary: View the dashboard layout!
+      description: Returns all of the enabled dashboard buttons
+      operationId: dashlet_timetable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                from: '2025-05-18'
+                until: '2025-05-19'
+        required: true    
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - date: '2025-05-19'
+                      assessments: []
+                      code: 8FOH.D
+                      ci: 517537
+                      description: Food Technology
+                      from: '11:45:00'
+                      until: '12:45:00'
+                      staff: E
+                      type: class
+                      room: R103
+                    - date: '2025-05-19'
+                      assessments: []
+                      code: 8SCI.B
+                      ci: 500983
+                      description: Science
+                      from: '14:10:00'
+                      until: '15:10:00'
+                      staff: F
+                      type: class
+                      room: R108
+                    - date: '2025-05-19'
+                      assessments: []
+                      code: PC.S2
+                      ci: 500992
+                      description: Pastoral Care Sion Middle
+                      from: '08:42:00'
+                      until: '09:00:00'
+                      staff: G
+                      type: class
+                      room: W204
+                    - date: '2025-05-19'
+                      assessments: []
+                      code: 8HAP
+                      ci: 516212
+                      description: HAP
+                      from: '12:50:00'
+                      until: '13:50:00'
+                      staff: H
+                      type: class
+                      room: R103
+                    - date: '2025-05-19'
+                      assessments: []
+                      code: 8MTH.B
+                      ci: 500895
+                      description: Mathematics
+                      from: '12:50:00'
+                      until: '13:50:00'
+                      staff: I
+                      type: class
+                      room: R108
+                    - date: '2025-05-19'
+                      assessments: []
+                      code: 8REL10.B
+                      ci: 517072
+                      description: Religious Education
+                      from: '09:00:00'
+                      until: '10:00:00'
+                      staff: J
+                      type: class
+                      room: R108
+                    - date: '2025-05-19'
+                      assessments: []
+                      code: 08PHD20.3C
+                      ci: 500908
+                      description: Physical Education
+                      from: '10:05:00'
+                      until: '11:05:00'
+                      staff: K
+                      type: class
+                      room: W205
+                  status: '200'
+  /seqta/student/events/load:
+    post:
+      tags:
+        - General
+      summary: View the events!
+      description: Returns all of the events. 
+      operationId: events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                dateFrom: '2025-05-18'
+                dateTo: '2025-05-19'
+                person: 1131
+                personType: student
+                
+        required: true    
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload: []
+                  status: '200'
+  /seqta/student/dashlet/summary/homework:
+    post:
+      tags:
+        - Dashboard
+      summary: Homework dashlet
+      description: Returns all of your homework :(. 
+      operationId: dashlet_homework
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - meta: 8027
+                      id: 4256
+                      title: Year 8 English
+                      items:
+                        - 'Students need to ensure that all questions are answered in their companion workbooks up to and including page 10. '
+                  status: '200'
+  /seqta/student/dashlet/notes:
+    post:
+      tags:
+        - Dashboard
+      summary: Notes dashlet
+      description: Returns your notes. 
+      operationId: dashlet_notes
+      requestBody:
+        content:
+          application/json:
+            example:
+              load: true
+        required: true
+      responses:
+        '200':
+          description: Successful operation. Author's note&colon; that is actually one of my notes.
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - contents: |-
+                        the quick brown fox jumped over the lazy dog<br>
+                        &nbsp;
+                      id: 2175
+                  status: '200'
+                  
+  /seqta/student/dashlet/tasks:
+    post:
+      tags:
+        - Dashboard
+      summary: Tasks dashlet
+      description: Returns your tasks. GET THEM DONE. 
+      operationId: dashlet_tasks
+      requestBody:
+        content:
+          application/json:
+            example:
+              load: true
+              completed: true
+        required: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - contents: <h2>Humanities</h2><p>Complete sketch</p>
+                      id: 9608
+                      completed: 1
+                  status: '200'
+  /seqta/student/dashlet/motd:
+    post:
+      tags:
+        - Dashboard
+      summary: Message of the day dashlet
+      description: Returns the message of the day. 
+      operationId: dashlet_motd
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    favourable: 23
+                    id: 1
+                    unfavourable: 134
+                    message: Quickly! Drain the moat!
+                  status: '200'
+  /seqta/student/dashlet/summary/absence:
+    post:
+      tags:
+        - Dashboard
+      summary: Absenses dashlet
+      description: Returns your absenses. 
+      operationId: dashlet_abs
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - date: '2025-02-17'
+                      data:
+                        - L4
+                    - date: '2025-02-21'
+                      data:
+                        - L4
+                    - date: '2025-03-03'
+                      data:
+                        - L4
+                    - date: '2025-03-07'
+                      data:
+                        - L4
+                    - date: '2025-03-21'
+                      data:
+                        - L2
+                    - date: '2025-03-31'
+                      data:
+                        - L4
+                    - date: '2025-04-07'
+                      data:
+                        - L5
+                    - date: '2025-04-28'
+                      data:
+                        - L4
+                    - date: '2025-05-02'
+                      data:
+                        - L4
+                    - date: '2025-05-08'
+                      data:
+                        - L4
+                  status: '200'
+  /seqta/student/dashlet/pastoral:
+    post:
+      tags:
+        - Dashboard
+      summary: Pastoral dashlet
+      description: Returns your pastoral dashlet items (not to be confused with pastoral summary). 
+      operationId: dashlet_pastoral
+      requestBody:
+        content:
+          application/json:
+            example:
+              from: '2025-04-18'
+              to: '2025-05-18'
+              
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload: []
+                  status: '200'
+  /seqta/student/dashlet/summary/pastoral:
+    post:
+      tags:
+        - Dashboard
+      summary: Pastoral summary dashlet
+      description: Returns your pastoral summary dashlet items (not to be confused with pastoral dashlet). 
+      operationId: dashlet_pastoral_s
+              
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    summary: []
+                    max_points: 0
+                    min: -1
+                    min_points: 0
+                    max: -1
+                  status: '200'
+  # GOALS
+  /seqta/student/load/goals:
+    post:
+      tags:
+        - Goals
+      summary: "MULTI-ENDPOINT: Goals"
+      description: |-
+        Goals multi-endpoint
+        # How do I use this endpoint?
+        There are 2 request bodies and 2 response bodies. There will always be a body and a response that match in name. Choose them both to see the result.
+      operationId: goals 
+      requestBody:
+        content:
+          application/json:
+            examples:
+              years:
+                value:
+                  mode: years
+              get_goals:
+                value:
+                  mode: goals
+                  year: 2025
+                  
+              
+      responses:
+        '200':
+          description: Successful operation. There will be lots of iterables
+          content:
+            application/json:
+              examples:
+                years:
+                  value:
+                    payload:
+                      - '2025'
+                      - '2024'
+                      - '2023'
+                    status: '200'
+
+                get_goals:
+                  value:
+                    payload:
+                      goal: 1435
+                      student: 1131
+                      name: Andrew E
+                      id: 149
+                      items: []
+                    status: '200'
+                    
+  # NOTICES                
+  /seqta/student/load/notices:
+    post:
+      tags:
+        - Notices
+      summary: "MULTI-ENDPOINT: Notices"
+      description: |-
+        Notices multi-endpoint
+        # How do I use this endpoint?
+        There are 2 request bodies and 2 response bodies. There will always be a body and a response that match in name. Choose them both to see the result.
+      operationId: notices 
+      requestBody:
+        content:
+          application/json:
+            examples:
+              labels:
+                value:
+                  mode: labels
+                  
+              get_notices:
+                value:
+                  date: '2025-05-18'
+                  
+              
+      responses:
+        '200':
+          description: Successful operation. There will be lots of iterables
+          content:
+            application/json:
+              examples:
+                labels:
+                  value:
+                    payload:
+                      - colour: '#cc0000'
+                        id: 3
+                        title: Events
+                      - colour: '#f57900'
+                        id: 7
+                        title: Junior School
+                      - colour: '#3465a4'
+                        id: 4
+                        title: Middle School
+                      - colour: '#9c27b0'
+                        id: 10
+                        title: Middle & Senior School
+                      - colour: '#edd400'
+                        id: 2
+                        title: Prayer
+                      - colour: '#73d216'
+                        id: 5
+                        title: Senior School
+                      - colour: '#75507b'
+                        id: 6
+                        title: Whole School
+                    status: '200'
+                get_notices:
+                  value:
+                    payload:
+                      - contents: |-
+                          <strong>Welcome to your first lesson of food tech boys.<br>
+                          <br>
+                          Important For today:<br>
+                          <br>
+                          Meet at the Walsh Theatre at the end of lunch.<br>
+                          <br>
+                          DON'T BRING ANYTHING TO LESSON PLEASE!!<br>
+                          <br>
+                          See at the Walsh at 2:10pm!!<br>
+                          <br>
+                          Mr Mack</strong>
+                        staff: e Mackereth
+                        label: 0
+                        title: Year 7 FOOD TECH Today - MR MACKERETH'S CLASS Lesson 5
+                    status: '200'
+                    
+                
+  # PORTALS
+  /seqta/student/load/portals:
+    post:
+      tags:
+        - Portals
+      summary: Portals
+      description: Returns your portals. 
+      operationId: portals 
+      requestBody:
+        content:
+          application/json:
+            examples:
+              splash:
+                value:
+                  splash: true
+              uuid:
+                value:
+                  uuid: ""
+              neither:
+                value:
+      responses:
+        '200':
+          description: Successful operation. There will be lots of iterables
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - is_power_portal: true
+                      icon: colour-violet
+                      id: 18
+                      label: HOME - Students
+                      priority: 10
+                      uuid: d21453a0-26ba-448d-b6e6-dcf23f93cb98
+                      url: ''
+                  status: '200'
+  # REPORTS
+  /seqta/student/load/reports:
+    post:
+      tags:
+        - Reports
+      summary: Reports
+      description: Your reports 
+      operationId: reports
+              
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    - types: ' Instrumental, Semester 2'
+                      filename: 2024_2024SCS2__Instrumental-Semester_2_1815_{surname}_{name}_7.pdf
+                      size: '0'
+                      terms: 2024SCS2
+                      year: '7'
+                      context_uuid: 329aa96d-d039-4062-a95c-78c89aecb4dc
+                      mimetype: application/pdf
+                      id: 634121
+                      created_date: '2024-12-13 09:49:53.708588+10:30'
+                      uuid: 6efdb56d-2141-428b-9289-1f4d78367957
+                  status: '200'
+  # TIMETABLE
+  /seqta/student/load/timetable:
+    post:
+      tags:
+        - Timetable
+      summary: Portals
+      description: Returns your timetable data. 
+      operationId: tt
+      requestBody:
+        content:
+          application/json:
+            example:
+              from: '2025-05-18'
+              until: '2025-05-18'
+              student: 69 
+              
+      responses:
+        '200':
+          description: Successful operation. There will be lots of iterables
+          content:
+            application/json:
+              example:
+                schema:
+                  payload:
+                    cycles:
+                      '2025-05-21':
+                        - Wednesday
+                      '2025-05-20':
+                        - Tuesday
+                      '2025-05-23':
+                        - Friday
+                      '2025-05-22':
+                        - null
+                        - Thursday
+                      '2025-05-19':
+                        - Monday
+                    items:
+                      - date: '2025-05-19'
+                        period: Lesson 3
+                        assessments: []
+                        code: 8FOH.D
+                        metaID: 8477
+                        ci: 517537
+                        staffEmail: a@a.com
+                        description: Food Technology
+                        staff: Hello!
+                        type: class
+                        room: R103
+                        programmeID: 4671
+                        teamSync: false
+                        teamId: ''
+                        from: '11:45:00'
+                        until: '12:45:00'
+                        programme: Year 8 Food Technology  2024
+                        staffID: 36
+                  status: '200'
+                  
+                  
+  # MISC
+  /js/images/kitten.png:
+    get:
+
+      tags:
+        - Misc
+      summary: get the cute cate image
+      description: cat
+      operationId: cat
+      responses:
+        '200':
+          description: cat. literally just cat
+          content:
+            image/jpeg:
+              schema:
+                format: binary
+                example: You can find out :)
+  /js/audio/notify.mp3:
+    get:
+
+      tags:
+        - Misc
+      summary: notify sound
+      description: the notify sound
+      operationId: notify_sound
+      responses:
+        '206':
+          description: sound 
+          content:
+            audio/mp3:
+              schema:
+                format: binary
+                example:
+                  You can find out :)
+  /js/audio/question.mp3:
+    get:
+      tags:
+        - Misc
+      summary: question sound
+      description: the sound that plays when you compose a message on loud settings
+      operationId: question_sound
+      responses:
+        '206':
+          description: sound 
+          content:
+            audio/mp3:
+              schema:
+                format: binary
+                example:
+                  You can find out :)
+                
+                
+components:
+  securitySchemes:
+    cookie: # arbitrary name for the security scheme; will be used in the "security" key later
+      type: apiKey
+      in: cookie
+      name: JSESSIONID # cookie name
+    ga: # arbitrary name for the security scheme; will be used in the "security" key later
+      type: apiKey
+      in: cookie
+      name: _ga # cookie name
+
+security:
+  - cookie: []
+  - ga: []

@@ -5,9 +5,9 @@ info:
     # The BetterSEQTA+ team is informing you that cookies are required for functional use of these APIs. Do not share any of the cookies used for these apis as they can be used to make modifications to your SEQTA assets (such as deleting emails and removing submissions). We are not responsible for any issues caused.
     ## We regret to inform you that the `Try it out` buttons will not work due to CORS issues. We're working on a fix.
     Hello! You've stumbled (maybe you intentionally accessed it?) upon the documentation for SEQTA APIs. As we believe that software shouldn't be undocumented, the BetterSEQTA+ team has reviewed lots of SEQTA apis and has put them into a big API reference page for future use. We will update this accordingly.
-    
+
     If you approve in this kind of stuff, join us at [our Discord!](https://discord.gg/uMkrgj57F5) We are a community dedicated to improving seqta and its functions. 
-    
+
     *Maybe check out [The documenter's GitHub](https://github.com/ar-cyber), [The leader's GitHub](https://github.com/sethburkart123), [The quick-developer's GitHub](https://github.com/adenmgb), and [The deputy's GitHub](https://github.com/crazypersonalph) while you're here?*
   contact:
     email: betterseqta.plus@gmail.com
@@ -19,25 +19,25 @@ servers:
   - url: https://{instance}
     variables:
       instance:
-        default: "change.me"
+        default: change.me
         description: The query URL
 tags:
   - name: General
     description: General APIs such as logging in and finding settings.
   - name: Assessments
-    description: Assessment-related api calls # Complete
+    description: Assessment-related api calls
   - name: Courses
-    description: Courses-related API calls. # complete
+    description: Courses-related API calls.
   - name: Dashboard
-    description: Interacting with dashboard applets (or as they like to call them, dashlets) # comp
+    description: Interacting with dashboard applets (or as they like to call them, dashlets)
   - name: Direct Messages
-    description: Sending and receiving messages # comp
+    description: Sending and receiving messages
   - name: Goals
     description: Show the goals.
   - name: Notices
     description: View the notices!
   - name: Portals
-    description: Loading the pain of portals # comp
+    description: Loading the pain of portals
   - name: Reports
     description: View your reports
   - name: Timetable
@@ -45,7 +45,6 @@ tags:
   - name: Misc
     description: Things like the kitty on the 404 page and the mp3s for notifications
 paths:
-  # General
   /seqta/student/load/subjects:
     post:
       tags:
@@ -150,7 +149,6 @@ paths:
                       description: 2025 Senior Campus Semester 1
                       active: 1
                       id: 30
-                  
                   status: '200'
   /seqta/student/load/prefs:
     post:
@@ -167,7 +165,6 @@ paths:
                 request: userPrefs
                 asArray: true
                 user: 1131
-              
       responses:
         '200':
           description: Successful operation
@@ -236,7 +233,6 @@ paths:
           application/json:
             example:
               mode: list
-              
       responses:
         '200':
           description: Successful operation
@@ -248,7 +244,6 @@ paths:
                     forums: []
                     me: Andrew E
                   status: '200'
-                  
   /seqta/student/releasealert/get:
     post:
       tags:
@@ -266,7 +261,6 @@ paths:
                   payload:
                     releasealerts: []
                   status: '200'
-                  
   /seqta/student/login:
     post:
       tags:
@@ -279,10 +273,9 @@ paths:
           application/json:
             schema:
               example:
-                mode: "normal"
+                mode: normal
                 query: null
-                redirect_url: 'any string'
-              
+                redirect_url: any string
         required: true
       responses:
         '200':
@@ -324,20 +317,22 @@ paths:
       description: Returns an array of settings
       operationId: get_photo_of_student
       parameters:
-          - in: query
-            name: uuid
-            schema:
-              type: string
-              description: UUID of the user
-            required: true
-          - in: query
-            name: format
-            schema:
-              type: string
-              description: The resolution of the file
-              enum: [low, med, high]
-
-            required: true
+        - in: query
+          name: uuid
+          schema:
+            type: string
+            description: "UUID of the user's photo (hint: you're going to need to use messages)"
+          required: true
+        - in: query
+          name: format
+          schema:
+            type: string
+            description: The resolution of the file
+            enum:
+              - low
+              - med
+              - high
+          required: true
       responses:
         '200':
           description: The user's image
@@ -361,7 +356,6 @@ paths:
                 timestamp: '2025-05-18 10:11:37.0'
                 hash: '#?page=/messages'
         required: true
-
       responses:
         '200':
           description: Successful operation
@@ -371,7 +365,7 @@ paths:
                 payload:
                   identifier: any
                   version: 2025.4.1-master-20250409-184
-                  uuid: 'your user uuid'
+                  uuid: your user uuid
                   notifications: []
                   ts: '2025-05-18 10:16:37.08500'
                 status: '200'
@@ -385,8 +379,7 @@ paths:
         content:
           manymimetypes:
             schema:
-              example:
-                As it is a XHR2 upload, the data can't be shared here due to the nature of one.
+              example: As it is a XHR2 upload, the data can't be shared here due to the nature of one.
         required: true
       responses:
         '200':
@@ -400,11 +393,9 @@ paths:
                   mimetype: text/html
                   id: '674132'
                   created_date: '2025-05-18T11:03:16.947'
-                  uuid: 'in most cases the same as the context_uuid'
+                  uuid: in most cases the same as the context_uuid
                   created_by: 1131
                 status: '200'
-              
-
   /seqta/student/message/people:
     post:
       tags:
@@ -416,9 +407,8 @@ paths:
           application/json:
             schema:
               example:
-                mode: "can be: student, staff or tutor"
+                mode: 'can be: student, staff or tutor'
         required: true
-                
       responses:
         '200':
           description: be careful; the iterable can have lots of entries
@@ -437,7 +427,6 @@ paths:
                     rollgroup: LOL1
                     house: LOL
                 status: '200'
-                
   /seqta/student/themes/list:
     post:
       tags:
@@ -449,9 +438,8 @@ paths:
           application/json:
             schema:
               example:
-                mode: "can be: student, staff or tutor"
+                mode: 'can be: student, staff or tutor'
         required: true
-                
       responses:
         '200':
           description: be careful; the iterable can have lots of entries
@@ -604,8 +592,6 @@ paths:
                     fontSize: 10pt
                     documentBackground: '#77216f radial-gradient(at center, #77216f, #2c001e)'
                 status: '200'
-                
-                
   /seqta/student/settings:
     post:
       tags:
@@ -614,13 +600,12 @@ paths:
       description: Returns an array of settings
       operationId: settings
       parameters:
-          - in: query
-            name: any
-            schema:
-              type: string
-              description: This can be anything. Just pass a space as it is required
-            required: true
-
+        - in: query
+          name: any
+          schema:
+            type: string
+            description: This can be anything. Just pass a space as it is required
+          required: true
       responses:
         '200':
           description: Successful operation
@@ -746,17 +731,13 @@ paths:
                   global.oneDrive.clientId:
                     value: String
                 status: '200'
-  
-  
-  
+                
   # DIRECT MESSAGES
-    
   /seqta/student/load/message:
     post:
       tags:
         - Direct Messages
-      summary: |-
-        MULTI-ENDPOINT: Get labels, messages, or a message
+      summary: 'MULTI-ENDPOINT: Get labels, messages, or a message'
       description: |-
         An endpoint to do multiple things: a Multi-endpoint!
         # How do I use this endpoint?
@@ -806,7 +787,7 @@ paths:
                 get_messages:
                   description: NOTE&colon; Expect more than one iterable. It is defined by the `limit` parameter in the request.
                   value:
-                    payload:
+                    payload: null
                     hasMore: true
                     messages:
                       - date: '2025-05-16 11:05:30.500763+09:30'
@@ -827,11 +808,11 @@ paths:
                 get_a_message:
                   description: The response of one email
                   value:
-                    payload:
+                    payload: null
                     date: '2025-05-16 10:22:05.648225+09:30'
                     blind: false
                     read: true
-                    subject: 'file'
+                    subject: file
                     sender_type: student
                     contactMeta: []
                     sender_id: 1679
@@ -841,13 +822,13 @@ paths:
                     contents: ''
                     sender: Some One
                     files:
-                      - filename: 'file.json'
+                      - filename: file.json
                         size: '1'
-                        context_uuid: 'uuid'
+                        context_uuid: uuid
                         mimetype: application/json
                         id: 599042
                         created_date: '2025-05-16 10:22:03.599289+09:30'
-                        uuid: 'same as context_uuid most of the time'
+                        uuid: same as context_uuid most of the time
                         created_by: '69'
                     id: 635100
                     participants:
@@ -857,7 +838,6 @@ paths:
                         id: 70
                         type: student
                     status: '200'
-  
   /seqta/student/save/message:
     post:
       tags:
@@ -876,21 +856,20 @@ paths:
                   - staff: true
                     id: 589
                 blind: false
-                files: ['same as the loading message one']
-        required: true          
-                
+                files:
+                  - same as the loading message one
+        required: true
       responses:
         '200':
           description: The response. The `id` property is the message id, not the receipent's id.
           content:
             application/json:
-              example:     
+              example:
                 payload:
                   subject: e
                   recipients: 1
                   id: 635615
                 status: '200'
-  
   # ASSESSMENTS
   /seqta/student/assessment/list/upcoming:
     post:
@@ -905,15 +884,13 @@ paths:
             schema:
               example:
                 student: 69
-              
-        required: true          
-                
+        required: true
       responses:
         '200':
           description: The response. The `id` property is the message id, not the receipent's id.
           content:
             application/json:
-              example:     
+              example:
                 payload:
                   - expectationsCompleted: false
                     metaclassID: 8137
@@ -932,7 +909,6 @@ paths:
                     id: 32340
                     status: UPCOMING
                 status: '200'
-                
   /seqta/student/assessment/get:
     post:
       tags:
@@ -948,7 +924,7 @@ paths:
                 assessment: 32703
                 student: 1131
                 metaclass: 7912
-        required: true      
+        required: true
       responses:
         '200':
           description: The response
@@ -1029,7 +1005,6 @@ paths:
                     expectedCommentPrompt: null
                   locked: false
                 status: '200'
-                
   /seqta/student/assessment/submissions/get:
     post:
       tags:
@@ -1045,7 +1020,7 @@ paths:
                 assessment: 32703
                 student: 1131
                 metaclass: 7912
-        required: true      
+        required: true
       responses:
         '200':
           description: The response
@@ -1069,12 +1044,11 @@ paths:
                         uuid: 076136c1-b517-4733-a652-9f895fd070b1
                         created_by: '1131'
                     status: '200'
-                  
   /seqta/student/assessment/submissions/save:
     post:
       tags:
         - Assessments
-      summary: "MULTI-ENDPOINT: Modify the submissions"
+      summary: 'MULTI-ENDPOINT: Modify the submissions'
       description: |-
         Add/modify/delete a submission.
         # How do I use this endpoint?
@@ -1087,7 +1061,7 @@ paths:
           application/json:
             examples:
               add:
-                value: 
+                value:
                   action: link
                   assID: 35333
                   metaclass: 8110
@@ -1107,8 +1081,7 @@ paths:
                   metaclass: 8110
                   fileID: '674147'
                   undo: true
-        required: true          
-              
+        required: true
       responses:
         '200':
           description: The response
@@ -1119,27 +1092,80 @@ paths:
                   value:
                     payload:
                       - userfile: 674147
-                        filename: 'literally-anything.html'
+                        filename: literally-anything.html
                         size: '325'
                         context_uuid: 258b4761-8c1a-4918-b7f5-dcb318aae481
                         mimetype: text/html
                         id: 674147
                         created_date: '2025-05-18 13:21:42.775965+09:30'
-                        uuid: 'usually the same as context_uuid'
+                        uuid: usually the same as context_uuid
                         created_by: '1131'
                     status: '200'
-                    
                 erase:
                   value:
                     status: '200'
-  
-  # COURSES
+  /seqta/student/assessment/wisp/get:
+    post:
+      tags:
+        - Assessments
+      summary: 'Get wisp submissions'
+      description: Get wisp submissions for an assessment
+      operationId: wisp_submissions_get
+      requestBody:
+        content:
+          application/json:
+            example:
+              student: 1131
+              metaclass: 7759
+              assessment: 30686
+              
+        required: true
+      responses:
+        '200':
+          description: What a perfect time to plug my text-adventure game. This is a real submission btw.
+          content:
+             
+            application/json:
+              example:
+                payload:
+                  submissions:
+                    - submitted: 1
+                      contents: |-
+                        This is the GitHub:&nbsp;<a href="https://github.com/SockyCat/Text-Adventure" target="_blank">https://github.com/SockyCat/Text-Adventure</a>.<br>
+                        <br>
+                        To run the code:&nbsp;<a href="https://codesandbox.io/p/devbox/text-adventure-k7cvsv" target="_blank">https://codesandbox.io/p/devbox/text-adventure-k7cvsv</a>
+                      created: '2024-10-14 13:03:31.69852+10:30'
+                      id: 4814
+                      snapshot: 1
+                    - submitted: 1
+                      contents: |-
+                        This is the GitHub:&nbsp;<a href="https://github.com/SockyCat/Text-Adventure" target="_blank">https://github.com/SockyCat/Text-Adventure</a>.<br>
+                        <br>
+                        To run the code:&nbsp;<a href="https://codesandbox.io/p/devbox/text-adventure-k7cvsv" target="_blank">https://codesandbox.io/p/devbox/text-adventure-k7cvsv</a><br>
+                        <br>
+                        It has been set up this way as you cannot edit the code in the text adventure codesandbox. You can, using a fork and Pull requests, edit the GitHub code.&nbsp;
+                      created: '2024-10-14 13:09:09.506898+10:30'
+                      id: 4823
+                      snapshot: 1
+                    - contents: |-
+                        This&nbsp;is&nbsp;the&nbsp;GitHub:&nbsp;&nbsp;<a data-href="https://github.com/SockyCat/Text-Adventure" href="https://github.com/SockyCat/Text-Adventure" rel="noopener noreferrer" target="_blank">https://github.com/SockyCat/Text-Adventure&nbsp;</a>.<br>
+                        The codesandbox is present there.
+                      created: '2024-10-14 13:50:03.3077+10:30'
+                      id: 4856
+                      snapshot: 1
+                    - contents: |-
+                        This&nbsp;is&nbsp;the&nbsp;GitHub:&nbsp;&nbsp;<a href="https://github.com/SockyCat/Text-Adventure" target="_blank">https://github.com/SockyCat/Text-Adventure&nbsp;</a>.<br>
+                        The codesandbox is present there.
+                      created: '2024-11-29 06:33:00.659033+10:30'
+                  files: []
+                status: '200'
+                
   /seqta/student/load/courses:
     post:
       tags:
         - Courses
       summary: View the courses of a subject
-      description: Returns a course. 
+      description: Returns a course.
       operationId: courses
       requestBody:
         content:
@@ -1148,9 +1174,7 @@ paths:
               example:
                 programme: '4137'
                 metaclass: '8110'
-              
-                
-        required: true    
+        required: true
       responses:
         '200':
           description: Successful operation. VERY BIG ENDPOINT
@@ -1698,13 +1722,12 @@ paths:
                           'n': 1
                           o: "<p><a href=\"https://www.youtube.com/watch?v=PRVnRYoQlXk\" target=\"_blank\">How to use Pinyin to type</a><br>\n\t<br>\n\t<br>\n\t<a href=\"https://www.youtube.com/watch?v=5Ip4VjlD7Ew&amp;t=166s\" target=\"_blank\">Learn how to type characters on a keyboard</a><br>\n\t<br>\n\t<br>\n\t<br>\n\tConversation:&nbsp;<br>\n\t<br>\n\tA: Wǒ zài _________shang diàn.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì shuǐ.<br>\n\tB: Zhè shì shénme?<br>\n\tA: Zhè shì bīng chá.<br>\n\tB: Nà shì shénme?<br>\n\tA: Nà shì fangbian miàn.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai.<br>\n\tB: Zhè ge duōshǎo qián?<br>\n\tA: Zhè ge wǔ kuai wǔ mao<br>\n\tB: Yigòng duōshǎo qián?<br>\n\tA: Yi gong&nbsp; èr shí'èr kuai wǔ máo.<br>\n\tB: Tài guì le!<br>\n\t<br>\n\t<br>\n\t<br>\n\tIt would be best if you also worked on&nbsp;<a href=\"https://quizlet.com/au/913010243/grocery-shopping-in-chinese-flash-cards/?i=2rnyax&amp;x=1qqt\" target=\"_blank\">Grocery shopping in Chinese</a><br>\n\t<br>\n\t<br>\n\t&nbsp;</p>"
                   status: '200'
-                  
   /seqta/student/load/syllabus:
     post:
       tags:
         - Courses
       summary: View the syllabus of a subject
-      description: Returns a syllasbus. 
+      description: Returns a syllasbus.
       operationId: courses_syallabus
       requestBody:
         content:
@@ -1713,9 +1736,7 @@ paths:
               example:
                 programme: '4137'
                 metaclass: '8110'
-              
-                
-        required: true    
+        required: true
       responses:
         '200':
           description: Successful operation
@@ -1731,8 +1752,6 @@ paths:
                     i: 1650
                     'n': Chinese
                   status: '200'
-                  
-  # DASHBOARD
   /seqta/student/dashboard:
     post:
       tags:
@@ -1815,7 +1834,7 @@ paths:
                         config: '{ }'
                         order: 8
                   status: '200'
-  /seqta/student/dashlet/timetable:                
+  /seqta/student/dashlet/timetable:
     post:
       tags:
         - Dashboard
@@ -1829,7 +1848,7 @@ paths:
               example:
                 from: '2025-05-18'
                 until: '2025-05-19'
-        required: true    
+        required: true
       responses:
         '200':
           description: Successful operation
@@ -1914,7 +1933,7 @@ paths:
       tags:
         - General
       summary: View the events!
-      description: Returns all of the events. 
+      description: Returns all of the events.
       operationId: events
       requestBody:
         content:
@@ -1925,8 +1944,7 @@ paths:
                 dateTo: '2025-05-19'
                 person: 1131
                 personType: student
-                
-        required: true    
+        required: true
       responses:
         '200':
           description: Successful operation
@@ -1941,7 +1959,7 @@ paths:
       tags:
         - Dashboard
       summary: Homework dashlet
-      description: Returns all of your homework :(. 
+      description: Returns all of your homework :(.
       operationId: dashlet_homework
       responses:
         '200':
@@ -1962,7 +1980,7 @@ paths:
       tags:
         - Dashboard
       summary: Notes dashlet
-      description: Returns your notes. 
+      description: Returns your notes.
       operationId: dashlet_notes
       requestBody:
         content:
@@ -1983,13 +2001,12 @@ paths:
                         &nbsp;
                       id: 2175
                   status: '200'
-                  
   /seqta/student/dashlet/tasks:
     post:
       tags:
         - Dashboard
       summary: Tasks dashlet
-      description: Returns your tasks. GET THEM DONE. 
+      description: Returns your tasks. GET THEM DONE.
       operationId: dashlet_tasks
       requestBody:
         content:
@@ -2015,7 +2032,7 @@ paths:
       tags:
         - Dashboard
       summary: Message of the day dashlet
-      description: Returns the message of the day. 
+      description: Returns the message of the day.
       operationId: dashlet_motd
       responses:
         '200':
@@ -2035,7 +2052,7 @@ paths:
       tags:
         - Dashboard
       summary: Absenses dashlet
-      description: Returns your absenses. 
+      description: Returns your absenses.
       operationId: dashlet_abs
       responses:
         '200':
@@ -2081,7 +2098,7 @@ paths:
       tags:
         - Dashboard
       summary: Pastoral dashlet
-      description: Returns your pastoral dashlet items (not to be confused with pastoral summary). 
+      description: Returns your pastoral dashlet items (not to be confused with pastoral summary).
       operationId: dashlet_pastoral
       requestBody:
         content:
@@ -2089,7 +2106,6 @@ paths:
             example:
               from: '2025-04-18'
               to: '2025-05-18'
-              
       responses:
         '200':
           description: Successful operation
@@ -2104,9 +2120,8 @@ paths:
       tags:
         - Dashboard
       summary: Pastoral summary dashlet
-      description: Returns your pastoral summary dashlet items (not to be confused with pastoral dashlet). 
+      description: Returns your pastoral summary dashlet items (not to be confused with pastoral dashlet).
       operationId: dashlet_pastoral_s
-              
       responses:
         '200':
           description: Successful operation
@@ -2121,17 +2136,16 @@ paths:
                     min_points: 0
                     max: -1
                   status: '200'
-  # GOALS
   /seqta/student/load/goals:
     post:
       tags:
         - Goals
-      summary: "MULTI-ENDPOINT: Goals"
+      summary: 'MULTI-ENDPOINT: Goals'
       description: |-
         Goals multi-endpoint
         # How do I use this endpoint?
         There are 2 request bodies and 2 response bodies. There will always be a body and a response that match in name. Choose them both to see the result.
-      operationId: goals 
+      operationId: goals
       requestBody:
         content:
           application/json:
@@ -2143,8 +2157,6 @@ paths:
                 value:
                   mode: goals
                   year: 2025
-                  
-              
       responses:
         '200':
           description: Successful operation. There will be lots of iterables
@@ -2158,7 +2170,6 @@ paths:
                       - '2024'
                       - '2023'
                     status: '200'
-
                 get_goals:
                   value:
                     payload:
@@ -2168,18 +2179,16 @@ paths:
                       id: 149
                       items: []
                     status: '200'
-                    
-  # NOTICES                
   /seqta/student/load/notices:
     post:
       tags:
         - Notices
-      summary: "MULTI-ENDPOINT: Notices"
+      summary: 'MULTI-ENDPOINT: Notices'
       description: |-
         Notices multi-endpoint
         # How do I use this endpoint?
         There are 2 request bodies and 2 response bodies. There will always be a body and a response that match in name. Choose them both to see the result.
-      operationId: notices 
+      operationId: notices
       requestBody:
         content:
           application/json:
@@ -2187,12 +2196,9 @@ paths:
               labels:
                 value:
                   mode: labels
-                  
               get_notices:
                 value:
                   date: '2025-05-18'
-                  
-              
       responses:
         '200':
           description: Successful operation. There will be lots of iterables
@@ -2243,16 +2249,13 @@ paths:
                         label: 0
                         title: Year 7 FOOD TECH Today - MR MACKERETH'S CLASS Lesson 5
                     status: '200'
-                    
-                
-  # PORTALS
   /seqta/student/load/portals:
     post:
       tags:
         - Portals
       summary: Portals
-      description: Returns your portals. 
-      operationId: portals 
+      description: Returns your portals.
+      operationId: portals
       requestBody:
         content:
           application/json:
@@ -2262,9 +2265,9 @@ paths:
                   splash: true
               uuid:
                 value:
-                  uuid: ""
+                  uuid: ''
               neither:
-                value:
+                value: null
       responses:
         '200':
           description: Successful operation. There will be lots of iterables
@@ -2281,15 +2284,13 @@ paths:
                       uuid: d21453a0-26ba-448d-b6e6-dcf23f93cb98
                       url: ''
                   status: '200'
-  # REPORTS
   /seqta/student/load/reports:
     post:
       tags:
         - Reports
       summary: Reports
-      description: Your reports 
+      description: Your reports
       operationId: reports
-              
       responses:
         '200':
           description: Successful operation
@@ -2309,13 +2310,12 @@ paths:
                       created_date: '2024-12-13 09:49:53.708588+10:30'
                       uuid: 6efdb56d-2141-428b-9289-1f4d78367957
                   status: '200'
-  # TIMETABLE
   /seqta/student/load/timetable:
     post:
       tags:
         - Timetable
       summary: Portals
-      description: Returns your timetable data. 
+      description: Returns your timetable data.
       operationId: tt
       requestBody:
         content:
@@ -2323,8 +2323,7 @@ paths:
             example:
               from: '2025-05-18'
               until: '2025-05-18'
-              student: 69 
-              
+              student: 69
       responses:
         '200':
           description: Successful operation. There will be lots of iterables
@@ -2365,12 +2364,8 @@ paths:
                         programme: Year 8 Food Technology  2024
                         staffID: 36
                   status: '200'
-                  
-                  
-  # MISC
   /js/images/kitten.png:
     get:
-
       tags:
         - Misc
       summary: get the cute cate image
@@ -2386,7 +2381,6 @@ paths:
                 example: You can find out :)
   /js/audio/notify.mp3:
     get:
-
       tags:
         - Misc
       summary: notify sound
@@ -2394,13 +2388,12 @@ paths:
       operationId: notify_sound
       responses:
         '206':
-          description: sound 
+          description: sound
           content:
             audio/mp3:
               schema:
                 format: binary
-                example:
-                  You can find out :)
+                example: You can find out :)
   /js/audio/question.mp3:
     get:
       tags:
@@ -2410,26 +2403,22 @@ paths:
       operationId: question_sound
       responses:
         '206':
-          description: sound 
+          description: sound
           content:
             audio/mp3:
               schema:
                 format: binary
-                example:
-                  You can find out :)
-                
-                
+                example: You can find out :)
 components:
   securitySchemes:
-    cookie: # arbitrary name for the security scheme; will be used in the "security" key later
+    cookie:
       type: apiKey
       in: cookie
-      name: JSESSIONID # cookie name
-    ga: # arbitrary name for the security scheme; will be used in the "security" key later
+      name: JSESSIONID
+    ga:
       type: apiKey
       in: cookie
-      name: _ga # cookie name
-
+      name: _ga
 security:
   - cookie: []
   - ga: []

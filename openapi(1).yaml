@@ -3,7 +3,7 @@ info:
   title: SEQTA Learn API
   description: |-
     # The BetterSEQTA+ team is informing you that cookies are required for functional use of these APIs. Do not share any of the cookies used for these apis as they can be used to make modifications to your SEQTA assets (such as deleting emails and removing submissions). We are not responsible for any issues caused.
-    
+    ## We regret to inform you that the `Try it out` buttons will not work due to CORS issues. We're working on a fix.
     Hello! You've stumbled (maybe you intentionally accessed it?) upon the documentation for SEQTA APIs. As we believe that software shouldn't be undocumented, the BetterSEQTA+ team has reviewed lots of SEQTA apis and has put them into a big API reference page for future use. We will update this accordingly.
     
     If you approve in this kind of stuff, join us at [our Discord!](https://discord.gg/uMkrgj57F5) We are a community dedicated to improving seqta and its functions. 

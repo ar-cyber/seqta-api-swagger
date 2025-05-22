@@ -1,9 +1,10 @@
-# Swagger generated server
+# SEQTA API Reference
 
 ## Overview
-Just a API swagger file!
+OpenAPI (swagger) file for SEQTA Learn. <br>
+Head [here](https://seqtaapi.sockycat.net) to view the API.
 
-### installation
+### Installation
 1. install docker
 ```bash
 sudo apt install docker.io
@@ -17,4 +18,4 @@ git clone https://github.com/ar-cyber/seqta-api-swagger
 docker run -p 80:8080 -e SWAGGER_JSON="openapi(1).yaml" docker.swagger.io/swaggerapi/swagger-ui
 ```
 ## Contributions
-Create a pr and send screenshot of swagger editor instance with no/minimal errors.
+Create a Pull Request and send screenshot of swagger editor instance with no/minimal errors.
